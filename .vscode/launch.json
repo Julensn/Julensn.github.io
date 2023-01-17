@@ -5,10 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "C:/Users/Josue/Documents/GitHub/Julensn.github.io/index.html",
+            "webRoot": "${workspaceFolder}"
+        },
+    {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "chrome",
+        "url": "C:/Users/Josue/Documents/GitHub/Julensn.github.io/index.html",
+        "webRoot": "${workspaceFolder}"
+    },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
+            "url": "C:/Users/Josue/Documents/GitHub/Julensn.github.io/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
