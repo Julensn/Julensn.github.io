@@ -24,30 +24,39 @@ body {
 }
 
 /* =======================
-   HEADER
+   HEADER & NAVIGATION
 ========================== */
 header {
     background: var(--primary-color);
     color: var(--white);
-    padding: 1rem 0;
+    padding: 1rem 20px; /* Ajusta padding si es necesario */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    position: relative; /* Necesario para posicionar el menú móvil */
+    flex-wrap: wrap; /* Permite que el logo y nav se reacomoden si no caben */
 }
 
-.logo h1 {
-    margin: 0;
-    padding-left: 20px;
+.logo a.logo-link { /* Estilo para el enlace del logo */
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.8rem; /* Tamaño del texto del logo */
+    font-weight: bold;
 }
+/* Si usas imagen de logo: */
+/*
+.logo img {
+    max-height: 40px; / Altura máxima del logo /
+    display: block; / Evita espacio extra debajo /
+}
+*/
 
 nav ul {
     list-style: none;
-    display: flex;
+    display: flex; /* Por defecto en línea para desktop */
     gap: 10px;
     margin: 0;
-    padding-right: 20px;
-    flex-wrap: wrap;
+    padding: 0; /* Quita padding por defecto de ul */
 }
 
 nav ul li a {
@@ -59,8 +68,86 @@ nav ul li a {
     border-radius: var(--border-radius);
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active { /* Estilo para hover y enlace activo */
     background: var(--secondary-color);
+}
+
+/* =======================
+   MENU TOGGLE BUTTON
+========================== */
+.menu-toggle {
+    display: none; /* Oculto en desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px; /* Área clickeable */
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Animación */
+}
+
+/* Animación del botón a "X" cuando el menú está activo */
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =======================
+   RESPONSIVE (para menú)
+========================== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Muestra el botón en móvil */
+        order: 1; /* Coloca el botón después del logo si es necesario */
+    }
+
+    nav {
+       order: 2; /* Asegura que nav venga después */
+       width: 100%; /* Ocupa todo el ancho para el menú desplegable */
+    }
+
+    nav ul {
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column; /* Apila los enlaces verticalmente */
+        width: 100%; 
+        position: absolute; /* Posiciona relativo al header */
+        top: 100%; /* Justo debajo del header */
+        left: 0;
+        background-color: var(--secondary-color); /* Fondo para el menú desplegado */
+        padding: 10px 0; /* Espaciado interno */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
+        z-index: 1000; /* Asegura que esté por encima */
+    }
+
+    nav ul.active { /* Clase que mostrará el menú */
+        display: flex; 
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center; /* Centra el texto de los enlaces */
+    }
+
+    nav ul li a {
+        padding: 1rem; /* Más espacio vertical en móvil */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    }
+    nav ul li:last-child a {
+        border-bottom: none; /* Sin borde en el último */
+    }
 }
 
 /* =======================
