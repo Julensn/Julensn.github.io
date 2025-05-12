@@ -2,8 +2,8 @@
    VARIABLES GLOBALES
 ========================== */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #34495e;
+    --primary-color: #4C3F3A;
+    --secondary-color: #4C3F3A;
     --accent-color: #e74c3c;
     --text-color: #333;
     --light-bg: #f9f9f9;
@@ -29,7 +29,7 @@ body {
 header {
     background: var(--primary-color);
     color: var(--white);
-    padding: 1rem 20px; /* Ajusta padding si es necesario */
+    padding: 2.2rem 20px; /* Ajusta padding si es necesario */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,19 +37,17 @@ header {
     flex-wrap: wrap; /* Permite que el logo y nav se reacomoden si no caben */
 }
 
-.logo a.logo-link { /* Estilo para el enlace del logo */
-    color: var(--white);
-    text-decoration: none;
-    font-size: 1.8rem; /* Tamaño del texto del logo */
-    font-weight: bold;
+.logo h1 {
+    font-family: "Dancing Script", cursive;  /* Fuente con toque tradicional */
+    font-size: 2.8rem;                       /* Ajusta el tamaño según tu preferencia */
+    color: #ddc330;                          /* Mantenemos el color dorado similar */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+    margin: 0;           
+                        /* Opcional: elimina espacios por defecto */
 }
-/* Si usas imagen de logo: */
-/*
-.logo img {
-    max-height: 40px; / Altura máxima del logo /
-    display: block; / Evita espacio extra debajo /
-}
-*/
+
+
+
 
 nav ul {
     list-style: none;
