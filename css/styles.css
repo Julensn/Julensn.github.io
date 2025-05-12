@@ -1,19 +1,39 @@
-/* Estilos generales */
+/* =======================
+   VARIABLES GLOBALES
+========================== */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #e74c3c;
+    --text-color: #333;
+    --light-bg: #f9f9f9;
+    --white: #fff;
+    --border-radius: 5px;
+}
+
+/* =======================
+   ESTILOS BASE
+========================== */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: var(--text-color);
+    background-color: #fff;
 }
 
+/* =======================
+   HEADER
+========================== */
 header {
-    background: #2c3e50;
-    color: white;
+    background: var(--primary-color);
+    color: var(--white);
     padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo h1 {
@@ -24,40 +44,148 @@ header {
 nav ul {
     list-style: none;
     display: flex;
+    gap: 10px;
     margin: 0;
     padding-right: 20px;
+    flex-wrap: wrap;
 }
 
 nav ul li a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     padding: 0.5rem 1rem;
     display: block;
+    transition: background 0.3s;
+    border-radius: var(--border-radius);
 }
 
 nav ul li a:hover {
-    background: #34495e;
+    background: var(--secondary-color);
 }
 
+/* =======================
+   MAIN CONTENT
+========================== */
 main {
     padding: 20px;
 }
 
-footer {
-    background: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 20px;
+/* Estilos básicos para el botón hamburguesa (ajusta según tu diseño) */
+.menu-toggle {
+    display: none; /* Oculto en desktop */
+    cursor: pointer;
+    padding-right: 20px; /* O donde quieras posicionarlo */
+}
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    margin: 5px 0;
+    transition: background-color 0.3s;
 }
 
-/* Estilos específicos para la página de inicio */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Oculto por defecto en móvil (JS lo mostrará) */
+        flex-direction: column; /* Apila los enlaces verticalmente */
+        width: 100%; /* Ocupa todo el ancho */
+        background-color: var(--secondary-color); /* Fondo para el menú desplegado */
+        position: absolute; /* O relative, según tu layout */
+        top: 100%; /* Posiciónalo debajo del header */
+        left: 0;
+        padding: 10px 0; /* Espaciado interno */
+        z-index: 1000; /* Asegura que esté por encima de otro contenido */
+    }
+     nav ul.active { /* Añade esta clase con JS cuando esté abierto */
+         display: flex;
+     }
+
+    .menu-toggle {
+        display: block; /* Muestra el botón en móvil */
+    }
+     header { /* Ajusta el header para que el toggle quepa */
+         position: relative; /* Necesario para posicionar el menú desplegable absoluto */
+     }
+}
+
+
+/* =======================
+   FOOTER
+========================== */
+footer {
+    background: var(--primary-color); /* Ya lo tienes */
+    color: var(--white);             /* Ya lo tienes */
+    text-align: center;              /* Ya lo tienes */
+    padding: 2rem 1rem;              /* Ya lo tienes, puedes ajustar si necesitas más/menos espacio vertical */
+    margin-top: 20px;                /* Ya lo tienes */
+}
+
+/* Estilo para el párrafo de la dirección y el enlace */
+footer p {
+    margin-bottom: 1.5rem; /* Añade más espacio debajo de los párrafos */
+}
+
+footer p a {
+    color: var(--white); /* Asegura que el enlace sea blanco */
+    text-decoration: none; /* Quita el subrayado por defecto */
+    border-bottom: 1px solid transparent; /* Prepara para subrayado en hover */
+    transition: border-bottom 0.3s ease;
+}
+
+footer p a:hover {
+    border-bottom: 1px solid var(--white); /* Subrayado blanco al pasar el ratón */
+}
+
+/* Contenedor de los iconos sociales */
+.social-icons {
+    margin-bottom: 1.5rem; /* Espacio debajo de los iconos */
+    display: flex;         /* Usa flexbox para alinear */
+    justify-content: center; /* Centra los iconos */
+    gap: 1.5rem;           /* Espacio horizontal ENTRE iconos (ajusta según tu gusto) */
+}
+
+/* Estilo para los enlaces de los iconos */
+.social-icons a {
+    color: var(--white);       /* Color uniforme blanco para los iconos */
+    font-size: 1.8rem;       /* Haz los iconos más grandes (ajusta el valor) */
+    text-decoration: none;   /* Quita cualquier subrayado del enlace */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al pasar el ratón sobre los iconos */
+.social-icons a:hover {
+    transform: scale(1.2);      /* Agranda un poco el icono */
+    color: #cccccc;             /* Opcional: Cambia ligeramente el color (ej. gris claro) */
+    /* O podrías volver a poner los colores originales en hover si lo prefieres: */
+    /* &.facebook:hover { color: #1877F2; } */
+    /* &.instagram:hover { color: #E1306C; } */
+    /* &.whatsapp:hover { color: #25D366; } */
+}
+
+/* Estilo para el texto de copyright (asegúrate de que use la clase o etiqueta correcta) */
+footer .copyright, /* Si añades una clase 'copyright' al párrafo */
+footer p:last-child { /* O selecciona el último párrafo si es siempre el copyright */
+    margin-bottom: 0; /* Quita el margen inferior del último elemento */
+    font-size: 0.9rem; /* Ligeramente más pequeño si quieres */
+    color: #bdc3c7;    /* Un gris claro para diferenciarlo un poco */
+}
+
+
+
+
+
+/* =======================
+   HOME PAGE - HERO
+========================== */
 .hero {
     background: url('../img/hero-bg.jpg') no-repeat center center/cover;
-    color: white;
+    color: var(--white);
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .hero h2 {
@@ -70,54 +198,65 @@ footer {
     margin-bottom: 2rem;
 }
 
+/* Botón principal */
 .btn {
     display: inline-block;
-    background: #e74c3c;
-    color: white;
+    background: var(--accent-color);
+    color: var(--white);
     padding: 0.8rem 1.5rem;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+    border-radius: var(--border-radius);
+    transition: background 0.3s, transform 0.2s;
 }
 
 .btn:hover {
     background: #c0392b;
+    transform: scale(1.05);
 }
 
+/* Secciones generales */
 .about, .hours {
     margin-bottom: 2rem;
     padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 5px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Estilos para la página del menú */
+/* =======================
+   MENÚ
+========================== */
 .menu-category {
     margin-bottom: 2rem;
 }
 
 .menu-item {
-    background: #f9f9f9;
+    background: var(--light-bg);
     padding: 1rem;
     margin-bottom: 1rem;
-    border-left: 4px solid #e74c3c;
+    border-left: 4px solid var(--accent-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .price {
     font-weight: bold;
-    color: #e74c3c;
+    color: var(--accent-color);
 }
 
-/* Estilos para el formulario de reservaciones */
+/* =======================
+   FORMULARIO DE RESERVAS
+========================== */
 .reservation-form {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
-    background: #f9f9f9;
-    border-radius: 5px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .form-group {
@@ -136,58 +275,54 @@ footer {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
 }
 
 .form-group textarea {
     min-height: 100px;
+    resize: vertical;
 }
 
 button[type="submit"] {
-    background: #2c3e50;
-    color: white;
+    background: var(--primary-color);
+    color: var(--white);
     border: none;
     padding: 0.8rem 1.5rem;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     font-size: 1rem;
+    transition: background 0.3s;
 }
 
 button[type="submit"]:hover {
-    background: #34495e;
+    background: var(--secondary-color);
 }
 
-/* Responsive design */
+/* =======================
+   RESPONSIVE
+========================== */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
         text-align: center;
     }
-    
+
     nav ul {
-        padding: 0;
         justify-content: center;
+        padding: 0;
     }
-    
+
     .hero h2 {
         font-size: 2rem;
     }
-}
 
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-
-
-
-
-
-
-footer a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: #f8f8f8;
-    text-decoration: underline;
+    .menu-item .price {
+        margin-top: 0.5rem;
+    }
 }
