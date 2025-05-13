@@ -263,7 +263,7 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
    HOME PAGE - HERO
 ========================== */
 .hero {
-    background: url('../img/hero-bg.jpg') no-repeat center center/cover;
+    background: url('../img/.jpg') no-repeat center center/cover;
     color: var(--white);
     padding: 4rem 2rem;
     text-align: center;
