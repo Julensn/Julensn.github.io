@@ -36,7 +36,7 @@ if (reservationForm) { // Verifica que el formulario exista en la página actual
         */
 
         // Simulación actual:
-        alert(`(Simulación) Gracias ${name}, tu reservación para ${guests} personas el ${date} a las ${time} ha sido recibida. Te contactaremos para confirmar.`);
+        alert(`Gracias ${name}, tu reservación para ${guests} personas el ${date} a las ${time} ha sido recibida. Te contactaremos para confirmar.`);
         this.reset(); // Limpiar el formulario
 
     }); // <--- Llave de cierre que faltaba
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
              // Simulación actual:
             const nameInput = document.getElementById('name');
             const name = nameInput ? nameInput.value : 'Cliente'; // Evita error si no hay input name
-            alert(`(Simulación) Gracias ${name}, tu reservación ha sido recibida.`);
+            alert(`Gracias ${name}, tu reservación ha sido recibida.`);
             this.reset(); 
         });
     }

@@ -147,6 +147,40 @@ nav ul li a.active { /* Estilo para hover y enlace activo */
   }
 }
 
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-item .price {
+        margin-top: 0.5rem;
+    }
+}
+
+
+
+
+
+
+
+
+
 /* =======================
    MAIN CONTENT
 ========================== */
@@ -263,7 +297,7 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
    HOME PAGE - HERO
 ========================== */
 .hero {
-    background: url('../img/.jpg') no-repeat center center/cover;
+    background: url('../img/portada.png') no-repeat center center/cover;
     color: var(--white);
     padding: 4rem 2rem;
     text-align: center;
@@ -386,27 +420,3 @@ button[type="submit"]:hover {
 /* =======================
    RESPONSIVE
 ========================== */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav ul {
-        justify-content: center;
-        padding: 0;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .menu-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-item .price {
-        margin-top: 0.5rem;
-    }
-}
