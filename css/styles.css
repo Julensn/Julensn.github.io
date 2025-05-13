@@ -37,13 +37,10 @@ header {
     flex-wrap: wrap; /* Permite que el logo y nav se reacomoden si no caben */
 }
 
-.logo h1 {
-    font-family: "Dancing Script", cursive;  /* Fuente con toque tradicional */
-    font-size: 2.8rem;                       /* Ajusta el tamaño según tu preferencia */
-    color: #ddc330;                          /* Mantenemos el color dorado similar */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
-    margin: 0;           
-                        /* Opcional: elimina espacios por defecto */
+.logo img {
+    height: 70px; /* Ajusta esta altura según necesites. El ancho se ajustará automáticamente si solo pones la altura */
+    max-width: 200px; /* Opcional: un ancho máximo si quieres controlarlo también */
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
 }
 
 
@@ -91,61 +88,64 @@ nav ul li a.active { /* Estilo para hover y enlace activo */
     transition: transform 0.3s ease, opacity 0.3s ease; /* Animación */
 }
 
-/* Animación del botón a "X" cuando el menú está activo */
-.menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
 
 
 /* =======================
    RESPONSIVE (para menú)
 ========================== */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* Muestra el botón en móvil */
-        order: 1; /* Coloca el botón después del logo si es necesario */
-    }
+  /* Ubicar el botón de menú en la esquina superior izquierda */
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100; /* Asegura que esté por encima del menú */
+  }
 
-    nav {
-       order: 2; /* Asegura que nav venga después */
-       width: 100%; /* Ocupa todo el ancho para el menú desplegable */
-    }
+  /* Posicionar el <header> para que sirva como contenedor relativo */
+  header {
+    position: relative;
+  }
 
-    nav ul {
-        display: none; /* Oculto por defecto en móvil */
-        flex-direction: column; /* Apila los enlaces verticalmente */
-        width: 100%; 
-        position: absolute; /* Posiciona relativo al header */
-        top: 100%; /* Justo debajo del header */
-        left: 0;
-        background-color: var(--secondary-color); /* Fondo para el menú desplegado */
-        padding: 10px 0; /* Espaciado interno */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
-        z-index: 1000; /* Asegura que esté por encima */
-    }
+  /* Transformar el <nav> en un menú off-canvas a la izquierda */
+  nav {
+    position: fixed;
+    top: 0;
+    left: -250px;  /* Oculto fuera de la pantalla inicialmente */
+    width: 250px;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding-top: 4rem; /* Para dejar espacio al header */
+  }
 
-    nav ul.active { /* Clase que mostrará el menú */
-        display: flex; 
-    }
+  /* Distribuir verticalmente los elementos del menú */
+  nav ul {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
 
-    nav ul li {
-        width: 100%;
-        text-align: center; /* Centra el texto de los enlaces */
-    }
+  /* Alinear a la izquierda y agregar espaciado a los items del menú */
+  nav ul li {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-    nav ul li a {
-        padding: 1rem; /* Más espacio vertical en móvil */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
-    }
-    nav ul li:last-child a {
-        border-bottom: none; /* Sin borde en el último */
-    }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    color: var(--white);
+  }
+
+  /* Cuando se active, movemos el <nav> a la vista */
+  nav.active {
+    left: 0;
+  }
 }
 
 /* =======================

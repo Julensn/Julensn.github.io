@@ -88,18 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         menuToggle.addEventListener('click', toggleMenu);
 
-        // Cerrar menú al hacer clic en un enlace (útil en móvil)
-        navList.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                // Cierra el menú solo si está activo y estamos en vista móvil
-                if (window.innerWidth <= 768 && navList.classList.contains('active')) {
-                    toggleMenu(); 
-                }
-                 // Opcional: Añadir clase 'active' al enlace clickeado y quitarla de otros
-                 navList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                 link.classList.add('active');
-            });
-        });
+       
 
         // Opcional: Cerrar menú si se hace clic fuera de él
         document.addEventListener('click', function(event) {
