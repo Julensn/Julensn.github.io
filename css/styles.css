@@ -2,8 +2,7 @@
    VARIABLES GLOBALES
 ========================== */
 :root {
-     --primary-color: #2c3e50;
-     --primary-color: #2c3e50;
+     --primary-color: #5E5246;
     --accent-color: #e74c3c;
     --text-color: #333;
     --light-bg: #f9f9f9;
@@ -39,7 +38,7 @@ header {
 
 .logo img {
     height: 70px; /* Ajusta esta altura según necesites. El ancho se ajustará automáticamente si solo pones la altura */
-    max-width: 200px; /* Opcional: un ancho máximo si quieres controlarlo también */
+    width: 200px; /* Opcional: un ancho máximo si quieres controlarlo también */
     display: block; /* Elimina cualquier espacio extra debajo de la imagen */
 }
 
