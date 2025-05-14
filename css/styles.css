@@ -194,7 +194,7 @@ footer p a:hover {
 
 /* Contenedor de los iconos sociales */
 .social-icons {
-    margin-bottom: 1.5rem; /* Espacio debajo de los iconos */
+    margin-bottom: 1rem; /* Espacio debajo de los iconos */
     display: flex;         /* Usa flexbox para alinear */
     justify-content: center; /* Centra los iconos */
     gap: 1.5rem;           /* Espacio horizontal ENTRE iconos (ajusta según tu gusto) */
