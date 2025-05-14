@@ -289,12 +289,14 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
     margin-bottom: 2rem;
 }
 
-.menu-category h3 {
+.menu-category h3, .menu-item-left h4, .menu h2{
     cursor: pointer;
     background-color: #f0f0f0;
     padding: 10px;
     border: none;
     border-radius: 5px;
+    font-family: 'Sawarabi Mincho', serif; /* Fuente japonesa */
+    color: #856433; /* Color dorado anaranjado */
 }
 
 .menu-item {
@@ -312,6 +314,7 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
 
 .menu-item-left {
     flex-basis: 40%;
+     color: #5E5246;
 }
 
 .menu-item-image {
@@ -325,11 +328,19 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
 }
 
 .menu-item-left .description {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: black;
 }
 
 .menu-item.active .description {
-    display: block;
+    
+     max-height: 500px; /* Ajusta este valor según sea necesario */
+    opacity: 1;
 }
 
 .price {
