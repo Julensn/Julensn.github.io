@@ -278,11 +278,23 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+
+
+
+
 /* =======================
    MENÚ
 ========================== */
 .menu-category {
     margin-bottom: 2rem;
+}
+
+.menu-category h3 {
+    cursor: pointer;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
 .menu-item {
@@ -295,12 +307,37 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
     align-items: center;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+
+.menu-item-left {
+    flex-basis: 40%;
+}
+
+.menu-item-image {
+    width: 250px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.menu-item-left .description {
+    display: none;
+}
+
+.menu-item.active .description {
+    display: block;
 }
 
 .price {
     font-weight: bold;
     color: var(--accent-color);
 }
+
+
 
 /* =======================
    FORMULARIO DE RESERVAS

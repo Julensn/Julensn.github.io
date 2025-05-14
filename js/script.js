@@ -108,9 +108,6 @@ document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
 
 
 
-
-    
-
     // --- Marcar enlace activo según la página actual ---
     const currentPage = window.location.pathname.split("/").pop(); // Obtiene el nombre del archivo (index.html, menu.html, etc.)
     const navLinks = document.querySelectorAll('nav ul li a');
@@ -126,3 +123,9 @@ document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
         }
     });
 
+const menuItems = document.querySelectorAll('.menu-item');
+menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
