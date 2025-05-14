@@ -3,6 +3,7 @@
 ========================== */
 :root {
      --primary-color: #5E5246;
+     --secondary-color: #5E5246;
     --accent-color: #e74c3c;
     --text-color: #333;
     --light-bg: #f9f9f9;
@@ -93,41 +94,49 @@ nav ul li a.active { /* Estilo para hover y enlace activo */
    RESPONSIVE (para menú)
 ========================== */
 @media (max-width: 768px) {
-  /* Ubicar el botón de menú en la esquina superior izquierda */
+
+    header {
+    position: relative;
+    z-index: 1001; /* Agregar z-index para que el botón de menú hamburguesa esté por encima del nav */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 4rem;
+    overflow-y: auto;
+  }
+
+  nav.active {
+    transform: translateX(0);
+  }
+
   .menu-toggle {
     display: block;
     position: absolute;
     top: 1rem;
     left: 1rem;
-    z-index: 1100; /* Asegura que esté por encima del menú */
+    z-index: 1100;
   }
 
-  /* Posicionar el <header> para que sirva como contenedor relativo */
-  header {
-    position: relative;
-  }
-
-  /* Transformar el <nav> en un menú off-canvas a la izquierda */
-  nav {
-    position: fixed;
-    top: 0;
-    left: -250px;  /* Oculto fuera de la pantalla inicialmente */
-    width: 250px;
-    height: 100%;
-    background-color: var(--primary-color);
-    transition: left 0.3s ease;
-    z-index: 1000;
-    padding-top: 4rem; /* Para dejar espacio al header */
-  }
-
-  /* Distribuir verticalmente los elementos del menú */
   nav ul {
     flex-direction: column;
     margin: 0;
     padding: 0;
   }
 
-  /* Alinear a la izquierda y agregar espaciado a los items del menú */
   nav ul li {
     width: 100%;
     text-align: left;
@@ -140,42 +149,7 @@ nav ul li a.active { /* Estilo para hover y enlace activo */
     padding: 1rem 0;
     color: var(--white);
   }
-
-  /* Cuando se active, movemos el <nav> a la vista */
-  nav.active {
-    left: 0;
-  }
 }
-
-
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav ul {
-        justify-content: center;
-        padding: 0;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .menu-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-item .price {
-        margin-top: 0.5rem;
-    }
-}
-
-
-
-
 
 
 
@@ -188,44 +162,7 @@ main {
     padding: 20px;
 }
 
-/* Estilos básicos para el botón hamburguesa (ajusta según tu diseño) */
-.menu-toggle {
-    display: none; /* Oculto en desktop */
-    cursor: pointer;
-    padding-right: 20px; /* O donde quieras posicionarlo */
-}
-.menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--white);
-    margin: 5px 0;
-    transition: background-color 0.3s;
-}
 
-@media (max-width: 768px) {
-    nav ul {
-        display: none; /* Oculto por defecto en móvil (JS lo mostrará) */
-        flex-direction: column; /* Apila los enlaces verticalmente */
-        width: 100%; /* Ocupa todo el ancho */
-        background-color: var(--secondary-color); /* Fondo para el menú desplegado */
-        position: absolute; /* O relative, según tu layout */
-        top: 100%; /* Posiciónalo debajo del header */
-        left: 0;
-        padding: 10px 0; /* Espaciado interno */
-        z-index: 1000; /* Asegura que esté por encima de otro contenido */
-    }
-     nav ul.active { /* Añade esta clase con JS cuando esté abierto */
-         display: flex;
-     }
-
-    .menu-toggle {
-        display: block; /* Muestra el botón en móvil */
-    }
-     header { /* Ajusta el header para que el toggle quepa */
-         position: relative; /* Necesario para posicionar el menú desplegable absoluto */
-     }
-}
 
 
 /* =======================
@@ -235,13 +172,13 @@ footer {
     background: var(--primary-color); /* Ya lo tienes */
     color: var(--white);             /* Ya lo tienes */
     text-align: center;              /* Ya lo tienes */
-    padding: 2rem 1rem;              /* Ya lo tienes, puedes ajustar si necesitas más/menos espacio vertical */
-    margin-top: 20px;                /* Ya lo tienes */
+    padding: 1rem 1rem;              /* Ya lo tienes, puedes ajustar si necesitas más/menos espacio vertical */
+    margin-top: 30px;                /* Ya lo tienes */
 }
 
 /* Estilo para el párrafo de la dirección y el enlace */
 footer p {
-    margin-bottom: 1.5rem; /* Añade más espacio debajo de los párrafos */
+    margin-bottom: 0.5rem; /* Añade más espacio debajo de los párrafos */
 }
 
 footer p a {
