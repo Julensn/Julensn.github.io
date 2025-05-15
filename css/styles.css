@@ -104,6 +104,9 @@ nav ul li a.active { /* Estilo para hover y enlace activo */
     padding: 1rem;
   }
 
+    .hero {
+     background: url('../img/LogoMitori.png') no-repeat center center/cover !important;
+  }
 
     .experience-grid {
         grid-template-columns: 1fr;
