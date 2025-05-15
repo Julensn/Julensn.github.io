@@ -133,3 +133,29 @@ menuItems.forEach(item => {
         item.classList.toggle('active');
     });
 });
+
+
+
+ const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = document.querySelector(".close");
+
+  // Añadir evento a todas las imágenes de clase menu-item-image
+  document.querySelectorAll(".menu-item-image").forEach(img => {
+    img.addEventListener("click", function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    });
+  });
+
+  // Cerrar el modal
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Cerrar al hacer clic fuera de la imagen
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
