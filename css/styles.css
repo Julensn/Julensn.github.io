@@ -236,7 +236,15 @@ main {
     transition: transform 0.3s ease;
 }
 
+.hours-section {
+  display: flex;
+  justify-content: flex-start;
+}
 
+.hours-section .experience-card {
+  width: 310px; /* ajusta el ancho de la tarjeta según sea necesario */
+  margin-left: 30px; /* ajusta el valor según sea necesario */
+}
 
 
 
