@@ -299,10 +299,7 @@ footer p a:hover {
 .social-icons a:hover {
     transform: scale(1.2);      /* Agranda un poco el icono */
     color: #cccccc;             /* Opcional: Cambia ligeramente el color (ej. gris claro) */
-    /* O podrías volver a poner los colores originales en hover si lo prefieres: */
-    /* &.facebook:hover { color: #1877F2; } */
-    /* &.instagram:hover { color: #E1306C; } */
-    /* &.whatsapp:hover { color: #25D366; } */
+    
 }
 
 /* Estilo para el texto de copyright (asegúrate de que use la clase o etiqueta correcta) */
