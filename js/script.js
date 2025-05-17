@@ -123,12 +123,14 @@ menuItems.forEach(item => {
 
 
 
+
+// MODAL PARA AMPLIAR LAS IMAGENES
  const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImg");
   const closeBtn = document.querySelector(".close");
 
   // Añadir evento a todas las imágenes de clase menu-item-image
-  document.querySelectorAll(".menu-item-image").forEach(img => {
+  document.querySelectorAll(".menu-item-image, .ampliar-imagen").forEach(img => {
     img.addEventListener("click", function() {
       modal.style.display = "block";
       modalImg.src = this.src;
