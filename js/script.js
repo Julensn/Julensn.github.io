@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mostrar mensaje de agradecimiento después de enviar el formulario
                 setTimeout(function() {
                     alert('Gracias por tu reserva, pronto te contactaremos para confirmar tu reserva');
+                     reservationForm.reset();   // Limpiar el formulario
                 }, 1000);
             }
         });
