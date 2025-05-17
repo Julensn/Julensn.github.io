@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (reservationForm) {
         reservationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
             // Obtener los valores del formulario
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Validación básica
             if (!name || !email || !date || !time || !guests) {
-            e.preventDefault();
+                e.preventDefault();
                 alert('Por favor complete todos los campos requeridos');
             } else {
                 // Mostrar mensaje de agradecimiento después de enviar el formulario
