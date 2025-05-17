@@ -17,26 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Validación básica
             if (!name || !email || !date || !time || !guests) {
+            e.preventDefault();
                 alert('Por favor complete todos los campos requeridos');
-                return;
+            } else {
+                // Mostrar mensaje de agradecimiento después de enviar el formulario
+                setTimeout(function() {
+                    alert('Gracias por tu reserva, pronto te contactaremos para confirmar tu reserva');
+                }, 1000);
             }
-
-            // Construir cuerpo del correo
-            const subject = `Reserva Mitori - ${name}`;
-            const body = `Nombre: ${name}%0AEmail: ${email}%0ATeléfono: ${phone}%0A%0A` +
-                         `Fecha: ${date}%0AHora: ${time}%0AComensales: ${guests}%0A%0A` +
-                         `Comentarios: ${comments || 'Ninguno'}`;
-
-            // Codificar valores para URL
-            const encodedSubject = encodeURIComponent(subject);
-            const encodedBody = encodeURIComponent(body);
-
-            // Abrir cliente de correo
-            window.location.href = `mailto:luisjousesuastegui@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-            // Mensaje de confirmación y reset
-            alert('Se abrirá su cliente de correo para confirmar la reserva');
-            this.reset();
         });
     }
 });
