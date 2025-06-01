@@ -1,32 +1,99 @@
-// Manejo del formulario de reservaciones
-//document.addEventListener('DOMContentLoaded', function() {
-//    const reservationForm = document.getElementById('reservationForm');
-    
-//    if (reservationForm) {
-//        reservationForm.addEventListener('submit', function(e) {
-//            // Obtener los valores del formulario
-//            const name = document.getElementById('name').value;
-//            const email = document.getElementById('email').value;
-//            const phone = document.getElementById('phone').value;
-//            const date = document.getElementById('date').value;
-//            const time = document.getElementById('time').value;
-//            const guests = document.getElementById('guests').value;
-//            const comments = document.getElementById('comments').value;
+document.addEventListener("DOMContentLoaded", function () {
+  const reservaForm = document.getElementById("reserva-form");
+  const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+  const mensajeError = document.getElementById("mensaje-error");
 
-            // Validación básica
-//            if (!name || !email || !date || !time || !guests) {
-//                e.preventDefault();
-//                alert('Por favor complete todos los campos requeridos');
-//            } else {
-//                // Mostrar mensaje de agradecimiento después de enviar el formulario
-//                setTimeout(function() {
-//                    alert('Gracias por tu reserva, pronto te contactaremos para confirmar tu reserva');
-//                     reservationForm.reset();   // Limpiar el formulario
-//                }, 1000);
-//            }
-//        });
-//    }
-//});
+  if (reservaForm) {
+    reservaForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // Validar fecha y hora
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+      const personas = parseInt(document.getElementById("personas").value, 10);
+
+      if (!validarDiaYHora(fecha, hora)) {
+        mostrarMensaje(mensajeError, "El restaurante está cerrado ese día u hora. Cerrado lunes, martes o fuera de horarios permitidos.");
+        return;
+      }
+
+      try {
+        const disponible = await validarDisponibilidad(fecha, hora, personas);
+
+        if (!disponible) {
+          mostrarMensaje(mensajeError, "No hay cupo suficiente para esa hora. Máximo 23 personas por turno.");
+          return;
+        }
+
+        await enviarFormulario(reservaForm);
+        mostrarMensaje(mensajeConfirmacion, "¡Reserva enviada con éxito!");
+        reservaForm.reset();
+      } catch (error) {
+        console.error("Error al enviar la reserva:", error);
+        mostrarMensaje(mensajeError, "Ocurrió un error al enviar la reserva. Intenta nuevamente.");
+      }
+    });
+  }
+});
+
+// Función para validar día y hora
+function validarDiaYHora(fechaStr, horaStr) {
+  const fecha = new Date(fechaStr);
+  const dia = fecha.getUTCDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+
+  if (dia === 1 || dia === 2) return false; // Lunes y martes cerrado
+
+  // Horarios permitidos: 13:30–15:00 y 20:30–22:30
+  return ["13:30", "20:30"].includes(horaStr);
+}
+
+// Función para validar disponibilidad
+async function validarDisponibilidad(fecha, hora, personas) {
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxCaZ9lvNyvQFJK_TD3TzSJjpBOjNbCu6Wci6oxgFtiUsgx4b8SIM1QRHEXmjNAyhq_/exec");
+    const data = await response.json();
+
+    // Filtrar reservas para misma fecha y hora
+    const reservas = data.filter(
+      (reserva) => reserva.Fecha === fecha && reserva.Hora === hora
+    );
+
+    const totalPersonas = reservas.reduce(
+      (sum, r) => sum + parseInt(r.Personas, 10),
+      0
+    );
+
+    return totalPersonas + personas <= 23;
+  } catch (error) {
+    console.error("Error al validar disponibilidad:", error);
+    return false;
+  }
+}
+
+// Función para enviar formulario
+async function enviarFormulario(form) {
+  const formData = new FormData(form);
+  const payload = {};
+  formData.forEach((value, key) => {
+    payload[key] = value;
+  });
+
+  await fetch("https://script.google.com/macros/s/AKfycbxCaZ9lvNyvQFJK_TD3TzSJjpBOjNbCu6Wci6oxgFtiUsgx4b8SIM1QRHEXmjNAyhq_/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: payload }),
+  });
+}
+
+// Función para mostrar mensajes
+function mostrarMensaje(elemento, mensaje) {
+  elemento.textContent = mensaje;
+  elemento.style.display = "block";
+
+  setTimeout(() => {
+    elemento.style.display = "none";
+  }, 4000);
+}
 
 
 
