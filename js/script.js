@@ -1,32 +1,32 @@
 // Manejo del formulario de reservaciones
-document.addEventListener('DOMContentLoaded', function() {
-    const reservationForm = document.getElementById('reservationForm');
+//document.addEventListener('DOMContentLoaded', function() {
+//    const reservationForm = document.getElementById('reservationForm');
     
-    if (reservationForm) {
-        reservationForm.addEventListener('submit', function(e) {
-            // Obtener los valores del formulario
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const guests = document.getElementById('guests').value;
-            const comments = document.getElementById('comments').value;
+//    if (reservationForm) {
+//        reservationForm.addEventListener('submit', function(e) {
+//            // Obtener los valores del formulario
+//            const name = document.getElementById('name').value;
+//            const email = document.getElementById('email').value;
+//            const phone = document.getElementById('phone').value;
+//            const date = document.getElementById('date').value;
+//            const time = document.getElementById('time').value;
+//            const guests = document.getElementById('guests').value;
+//            const comments = document.getElementById('comments').value;
 
             // Validación básica
-            if (!name || !email || !date || !time || !guests) {
-                e.preventDefault();
-                alert('Por favor complete todos los campos requeridos');
-            } else {
-                // Mostrar mensaje de agradecimiento después de enviar el formulario
-                setTimeout(function() {
-                    alert('Gracias por tu reserva, pronto te contactaremos para confirmar tu reserva');
-                     reservationForm.reset();   // Limpiar el formulario
-                }, 1000);
-            }
-        });
-    }
-});
+//            if (!name || !email || !date || !time || !guests) {
+//                e.preventDefault();
+//                alert('Por favor complete todos los campos requeridos');
+//            } else {
+//                // Mostrar mensaje de agradecimiento después de enviar el formulario
+//                setTimeout(function() {
+//                    alert('Gracias por tu reserva, pronto te contactaremos para confirmar tu reserva');
+//                     reservationForm.reset();   // Limpiar el formulario
+//                }, 1000);
+//            }
+//        });
+//    }
+//});
 
 
 
