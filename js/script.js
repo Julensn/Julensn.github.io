@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const reservaForm = document.getElementById("reserva-form");
   const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
   const mensajeError = document.getElementById("mensaje-error");
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx2N0hiuIpdR_aIPI7NxV15NnYO8gHEU3T4toeU84n_RfRKD_l-YRW6WBNUWOli-a5X/exec";
 
   if (reservaForm) {
     reservaForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      // Validar fecha y hora
       const fecha = document.getElementById("fecha").value;
       const hora = document.getElementById("hora").value;
       const personas = parseInt(document.getElementById("personas").value, 10);
@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       try {
         const disponible = await validarDisponibilidad(fecha, hora, personas);
-
         if (!disponible) {
           mostrarMensaje(mensajeError, "No hay cupo suficiente para esa hora. Máximo 23 personas por turno.");
           return;
@@ -36,64 +35,57 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Función para validar día y hora
 function validarDiaYHora(fechaStr, horaStr) {
   const fecha = new Date(fechaStr);
   const dia = fecha.getUTCDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
-
-  if (dia === 1 || dia === 2) return false; // Lunes y martes cerrado
-
-  // Horarios permitidos: 13:30–15:00 y 20:30–22:30
+  if (dia === 1 || dia === 2) return false; // lunes y martes cerrado
   return ["13:30", "20:30"].includes(horaStr);
 }
 
-// Función para validar disponibilidad
 async function validarDisponibilidad(fecha, hora, personas) {
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbxCaZ9lvNyvQFJK_TD3TzSJjpBOjNbCu6Wci6oxgFtiUsgx4b8SIM1QRHEXmjNAyhq_/exec");
+    const response = await fetch("SCRIPT_URL");
     const data = await response.json();
 
-    // Filtrar reservas para misma fecha y hora
-    const reservas = data.filter(
-      (reserva) => reserva.Fecha === fecha && reserva.Hora === hora
-    );
+    const reservas = data.filter((r) => r.date === fecha && r.shift === (hora === "13:30" ? "afternoon" : "night"));
+    const total = reservas.reduce((sum, r) => sum + parseInt(r.guests || 0, 10), 0);
 
-    const totalPersonas = reservas.reduce(
-      (sum, r) => sum + parseInt(r.Personas, 10),
-      0
-    );
-
-    return totalPersonas + personas <= 23;
-  } catch (error) {
-    console.error("Error al validar disponibilidad:", error);
+    return total + personas <= 23;
+  } catch (err) {
+    console.error("Error en validación de disponibilidad:", err);
     return false;
   }
 }
 
-// Función para enviar formulario
 async function enviarFormulario(form) {
   const formData = new FormData(form);
-  const payload = {};
-  formData.forEach((value, key) => {
-    payload[key] = value;
-  });
 
-  await fetch("https://script.google.com/macros/s/AKfycbxCaZ9lvNyvQFJK_TD3TzSJjpBOjNbCu6Wci6oxgFtiUsgx4b8SIM1QRHEXmjNAyhq_/exec", {
+  const hora = formData.get("hora");
+  const payload = {
+    date: formData.get("fecha"),
+    shift: hora === "13:30" ? "afternoon" : "night",
+    guests: formData.get("personas"),
+    name: formData.get("nombre"),
+    email: formData.get("email"),
+    phone: formData.get("telefono"),
+    comments: formData.get("comentarios")
+  };
+
+  await fetch("SCRIPT_URL", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ data: payload }),
+    body: JSON.stringify(payload)
   });
 }
 
-// Función para mostrar mensajes
 function mostrarMensaje(elemento, mensaje) {
   elemento.textContent = mensaje;
   elemento.style.display = "block";
-
   setTimeout(() => {
     elemento.style.display = "none";
   }, 4000);
 }
+
 
 
 
