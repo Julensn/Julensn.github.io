@@ -4,13 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const afternoonCount = document.getElementById('afternoon-count');
   const nightCount = document.getElementById('night-count');
   const dateInput = document.getElementById('date');
-  const shiftSelect = document.getElementById('shift');
 
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwzCY9t9Z0iTibLyflnIE5xvm4FmK8kuenMYQNslmbQVCEqNmslVwGsAZYisyS48kI9/exec';
+  // ACTUALIZA ESTA URL CON TU URL REAL DE APPS SCRIPT
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwiKHw7ru5K1rn8ElQ0_dELsoXoCikKgwXikfugwPf8RdJyazdDz2YfE4g3GYOTF-s6fA/exec';
 
-  // Configurar fecha mínima (hoy) y bloquear lunes/martes
-  dateInput.min = new Date().toISOString().split('T')[0];
-  
+  // Configurar fecha mínima (hoy)
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+
   // Obtener disponibilidad al cambiar fecha
   dateInput.addEventListener('change', (e) => {
     const selectedDate = e.target.value;
@@ -35,8 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para obtener disponibilidad
   async function fetchAvailability(date) {
     try {
-      const response = await fetch(`${API_URL}?date=${date}`);
+      // Agregar timestamp para evitar caché
+      const timestamp = new Date().getTime();
+      const response = await fetch(`${API_URL}?date=${date}&t=${timestamp}`);
+      
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      
       const data = await response.json();
+      console.log('Datos de disponibilidad:', data);
 
       if (data.success) {
         afternoonCount.textContent = data.afternoonAvailable;
@@ -46,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageBox.style.display = 'block';
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al obtener disponibilidad:', error);
       messageBox.textContent = 'Error de conexión. Intenta nuevamente.';
       messageBox.style.display = 'block';
     }
@@ -65,24 +74,37 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Crear objeto con datos del formulario
     const formData = {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       phone: form.phone.value.trim(),
-      date: form.date.value,
+      date: form.date.value,  // Formato YYYY-MM-DD
       shift: form.shift.value,
       guests: form.guests.value,
       comments: form.comments.value.trim()
     };
 
+    // Depuración: mostrar datos que se enviarán
+    console.log('Enviando reserva:', formData);
+
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'  // Ayuda con CORS
+        },
         body: JSON.stringify(formData)
       });
 
+      // Verificar si la respuesta es válida
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log('Respuesta del servidor:', result);
 
       if (result.success) {
         messageBox.textContent = '¡Reserva realizada con éxito!';
@@ -91,21 +113,22 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
         
         // Actualizar disponibilidad
-        if (formData.date) fetchAvailability(formData.date);
+        if (formData.date) {
+          fetchAvailability(formData.date);
+        }
       } else {
         messageBox.textContent = result.message || 'Error al procesar reserva';
         messageBox.style.color = 'red';
         messageBox.style.display = 'block';
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al enviar reserva:', error);
       messageBox.textContent = 'Error de conexión. Intenta nuevamente.';
       messageBox.style.color = 'red';
       messageBox.style.display = 'block';
     }
   });
 });
-
 
 
 
