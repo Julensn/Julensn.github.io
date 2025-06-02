@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const nightCount = document.getElementById('night-count');
   const dateInput = document.getElementById('date');
 
-  // ACTUALIZA ESTA URL CON TU URL REAL DE APPS SCRIPT
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzrwl_GAx1rDO3TEfWMGv5mohsYnGZdmZvUUwvouF4_7jnLFo1Ss0co6-1YGQPT1emU/exec';
+  // ACTUALIZA CON TU URL DE APPS SCRIPT
+  const API_URL = 'https://script.google.com/macros/s/TU_ID_DE_APPS_SCRIPT/exec';
 
   // Configurar fecha mínima (hoy)
   const today = new Date().toISOString().split('T')[0];
@@ -89,11 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Enviando reserva:', formData);
 
     try {
+      // PRIMERO: Enviar solicitud OPTIONS (preflight)
+      await fetch(API_URL, {
+        method: 'OPTIONS',
+        headers: {
+          'Origin': window.location.origin,
+          'Access-Control-Request-Method': 'POST',
+          'Access-Control-Request-Headers': 'Content-Type'
+        }
+      });
+
+      // SEGUNDO: Enviar los datos reales
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'  // Ayuda con CORS
+          'Origin': window.location.origin
         },
         body: JSON.stringify(formData)
       });
@@ -129,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+
 
 
 
