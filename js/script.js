@@ -63,84 +63,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Manejar envío de formulario
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Validar día seleccionado
-    const dateObj = new Date(form.date.value);
-    const day = dateObj.getDay();
-    if (day === 1 || day === 2) {
-      messageBox.textContent = 'No se pueden reservar los lunes o martes';
-      messageBox.style.display = 'block';
-      return;
+  const dateObj = new Date(form.date.value);
+  const day = dateObj.getDay();
+  if (day === 1 || day === 2) {
+    messageBox.textContent = 'No se pueden reservar los lunes o martes';
+    messageBox.style.display = 'block';
+    return;
+  }
+
+  const formData = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    phone: form.phone.value.trim(),
+    date: form.date.value,
+    shift: form.shift.value,
+    guests: form.guests.value,
+    comments: form.comments.value.trim()
+  };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
     }
 
-    // Crear objeto con datos del formulario
-    const formData = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      phone: form.phone.value.trim(),
-      date: form.date.value,  // Formato YYYY-MM-DD
-      shift: form.shift.value,
-      guests: form.guests.value,
-      comments: form.comments.value.trim()
-    };
+    const result = await response.json();
+    console.log('Respuesta del servidor:', result);
 
-    // Depuración: mostrar datos que se enviarán
-    console.log('Enviando reserva:', formData);
+    if (result.success) {
+      messageBox.textContent = '¡Reserva realizada con éxito!';
+      messageBox.style.color = 'green';
+      messageBox.style.display = 'block';
+      form.reset();
 
-    try {
-      // PRIMERO: Enviar solicitud OPTIONS (preflight)
-      await fetch(API_URL, {
-        method: 'OPTIONS',
-        headers: {
-          'Origin': window.location.origin,
-          'Access-Control-Request-Method': 'POST',
-          'Access-Control-Request-Headers': 'Content-Type'
-        }
-      });
-
-      // SEGUNDO: Enviar los datos reales
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Origin': window.location.origin
-        },
-        body: JSON.stringify(formData)
-      });
-
-      // Verificar si la respuesta es válida
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
+      if (formData.date) {
+        fetchAvailability(formData.date);
       }
-
-      const result = await response.json();
-      console.log('Respuesta del servidor:', result);
-
-      if (result.success) {
-        messageBox.textContent = '¡Reserva realizada con éxito!';
-        messageBox.style.color = 'green';
-        messageBox.style.display = 'block';
-        form.reset();
-        
-        // Actualizar disponibilidad
-        if (formData.date) {
-          fetchAvailability(formData.date);
-        }
-      } else {
-        messageBox.textContent = result.message || 'Error al procesar reserva';
-        messageBox.style.color = 'red';
-        messageBox.style.display = 'block';
-      }
-    } catch (error) {
-      console.error('Error al enviar reserva:', error);
-      messageBox.textContent = 'Error de conexión. Intenta nuevamente.';
+    } else {
+      messageBox.textContent = result.message || 'Error al procesar reserva';
       messageBox.style.color = 'red';
       messageBox.style.display = 'block';
     }
-  });
+  } catch (error) {
+    console.error('Error al enviar reserva:', error);
+    messageBox.textContent = 'Error de conexión. Intenta nuevamente.';
+    messageBox.style.color = 'red';
+    messageBox.style.display = 'block';
+  }
 });
-
 
 
 
