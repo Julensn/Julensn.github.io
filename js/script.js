@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dateInput = document.getElementById('date');
 
   // ACTUALIZA ESTA URL CON TU URL REAL DE APPS SCRIPT
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwiKHw7ru5K1rn8ElQ0_dELsoXoCikKgwXikfugwPf8RdJyazdDz2YfE4g3GYOTF-s6fA/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzrwl_GAx1rDO3TEfWMGv5mohsYnGZdmZvUUwvouF4_7jnLFo1Ss0co6-1YGQPT1emU/exec';
 
   // Configurar fecha mínima (hoy)
   const today = new Date().toISOString().split('T')[0];
