@@ -143,7 +143,15 @@ function showToast(message, success = true) {
 }
 
 
-
+// --- Acordeón para secciones con toggle-title ---
+  document.querySelectorAll('.toggle-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const content = title.nextElementSibling;
+      if (content && content.classList.contains('toggle-content')) {
+        content.classList.toggle('open');
+      }
+    });
+  });
 
 
 
@@ -181,15 +189,7 @@ if (header && nav && navList) { // Verifica que existan
   document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
 
 
-  // --- Acordeón para secciones con toggle-title ---
-  document.querySelectorAll('.toggle-title').forEach(title => {
-    title.addEventListener('click', () => {
-      const content = title.nextElementSibling;
-      if (content && content.classList.contains('toggle-content')) {
-        content.classList.toggle('open');
-      }
-    });
-  });
+  
 
 
 
