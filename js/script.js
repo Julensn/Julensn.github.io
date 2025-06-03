@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitBtn = form.querySelector('button[type="submit"]');
 
   // ✅ URL de tu Web App de Google Apps Script
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxHdqVESJ8oZDpSlIHMca4M_z1QfwxpN_TkD0X_mjXnuDHKLM4ulH-J8eFQQURQsK6X/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwjytf9G-wongHfCndaqR-ghlKaTfBGTy2emQ_cEaKyl4I3n6x1BMS4FLBGC4OPCOp54g/exec';
 
   // Establece la fecha mínima como hoy
   const today = new Date().toISOString().split('T')[0];
