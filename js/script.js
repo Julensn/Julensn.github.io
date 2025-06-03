@@ -4,27 +4,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const afternoonCount = document.getElementById('afternoon-count');
   const nightCount = document.getElementById('night-count');
   const dateInput = document.getElementById('date');
+  const shiftSelect = document.getElementById('shift');
+  const guestsSelect = document.getElementById('guests');
+  const submitBtn = form.querySelector('button[type="submit"]');
 
   // ✅ URL de tu Web App de Google Apps Script
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzwkBycCc9rSI4jlshaV70jLSCIEwce4AmBw8p0RK4eX5yxQzgkhcdqoPthsWrPjc_Gmw/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxHdqVESJ8oZDpSlIHMca4M_z1QfwxpN_TkD0X_mjXnuDHKLM4ulH-J8eFQQURQsK6X/exec';
 
   // Establece la fecha mínima como hoy
   const today = new Date().toISOString().split('T')[0];
   dateInput.min = today;
 
+  let availability = {}; // Guarda disponibilidad actual por turno
+
   // Mostrar disponibilidad al seleccionar fecha
-  dateInput.addEventListener('change', (e) => {
+   dateInput.addEventListener('change', (e) => {
     const selectedDate = e.target.value;
     if (selectedDate) {
       const dateObj = new Date(selectedDate);
       const day = dateObj.getDay();
 
-      if (day === 1 || day === 2) { // Lunes o martes
+      if (day === 1 || day === 2) {
         messageBox.textContent = 'El restaurante está cerrado los lunes y martes';
         messageBox.style.display = 'block';
         afternoonCount.textContent = '0';
         nightCount.textContent = '0';
         dateInput.value = '';
+        guestsSelect.disabled = true;
+        submitBtn.disabled = true;
       } else {
         messageBox.style.display = 'none';
         fetchAvailability(selectedDate);
@@ -32,12 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Obtener disponibilidad de turnos
   async function fetchAvailability(date) {
     try {
       const timestamp = new Date().getTime();
       const response = await fetch(`${API_URL}?date=${date}&t=${timestamp}`);
-
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       
       const data = await response.json();
@@ -46,6 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.success) {
         afternoonCount.textContent = data.afternoonAvailable;
         nightCount.textContent = data.nightAvailable;
+        availability = {
+          afternoon: data.afternoonAvailable,
+          night: data.nightAvailable
+        };
+        updateGuestsOptions(shiftSelect.value); // Actualiza si ya había turno seleccionado
       } else {
         messageBox.textContent = data.message || 'Error al obtener disponibilidad';
         messageBox.style.display = 'block';
@@ -57,14 +67,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Envío del formulario
+  shiftSelect.addEventListener('change', () => {
+    updateGuestsOptions(shiftSelect.value);
+  });
+
+  function updateGuestsOptions(shift) {
+    guestsSelect.innerHTML = '';
+
+    const maxAvailable = availability[shift];
+    if (!maxAvailable || maxAvailable <= 0) {
+      const option = document.createElement('option');
+      option.value = '';
+      option.textContent = 'Sin lugares disponibles';
+      guestsSelect.appendChild(option);
+      guestsSelect.disabled = true;
+      submitBtn.disabled = true;
+    } else {
+      guestsSelect.disabled = false;
+      submitBtn.disabled = false;
+
+      for (let i = 1; i <= Math.min(maxAvailable, 10); i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `${i} ${i === 1 ? 'persona' : 'persones'}`;
+        guestsSelect.appendChild(option);
+      }
+    }
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const dateObj = new Date(form.date.value);
     const day = dateObj.getDay();
     if (day === 1 || day === 2) {
-      messageBox.textContent = 'No es pot reservar dilluns ni dimarts.';
+      messageBox.textContent = 'No se puede reservar lunes ni martes.';
       messageBox.style.display = 'block';
       return;
     }
@@ -81,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
-    
         body: formData
       });
 
@@ -96,14 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (result.success) {
-        messageBox.textContent = '¡Reserva feta amb èxit!';
+        messageBox.textContent = '¡Reserva realizada con éxito!';
         messageBox.style.color = 'green';
         messageBox.style.display = 'block';
         form.reset();
-
-        if (form.date.value) {
-          fetchAvailability(form.date.value);
-        }
+        availability = {}; // Limpiar disponibilidad previa
+        afternoonCount.textContent = '23';
+        nightCount.textContent = '23';
+        guestsSelect.disabled = true;
+        submitBtn.disabled = true;
       } else {
         messageBox.textContent = result.message || 'Error al registrar reserva.';
         messageBox.style.color = 'red';
@@ -117,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
 
 
