@@ -575,7 +575,7 @@ footer p:last-child { /* O selecciona el último párrafo si es siempre el copyr
         }
 
         .shift-capacity span {
-            color: var(--accent-color);
+            color: green;
         }
 
         /* Mensajes del sistema */
