@@ -713,20 +713,18 @@ button[type="submit"]:hover {
     animation: spin 1s linear infinite;
 }
 
-
 .toggle-content {
-  display: none;
-  transition: max-height 0.3s ease;
+    display: none;
+    transition: max-height 0.3s ease;
 }
 
 .toggle-content.open {
-  display: block;
+    display: block;
 }
 
 .toggle-title {
-  cursor: pointer;
+    cursor: pointer;
 }
-
 
 .toast {
     visibility: hidden;
