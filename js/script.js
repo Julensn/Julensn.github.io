@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateObj = new Date(form.date.value);
     const day = dateObj.getDay();
     if (day === 1 || day === 2) {
-      messageBox.textContent = 'No se puede reservar lunes ni martes.';
+      messageBox.textContent = 'No es pot reservar dilluns ni dimarts.';
       messageBox.style.display = 'block';
       return;
     }
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (result.success) {
-        messageBox.textContent = '¡Reserva realizada con éxito!';
+        messageBox.textContent = '¡Reserva feta amb èxit!';
         messageBox.style.color = 'green';
         messageBox.style.display = 'block';
         form.reset();
