@@ -714,6 +714,20 @@ button[type="submit"]:hover {
 }
 
 
+.toggle-content {
+  display: none;
+  transition: max-height 0.3s ease;
+}
+
+.toggle-content.open {
+  display: block;
+}
+
+.toggle-title {
+  cursor: pointer;
+}
+
+
 .toast {
     visibility: hidden;
     min-width: 200px;
