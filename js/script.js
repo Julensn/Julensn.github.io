@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!maxAvailable || maxAvailable <= 0) {
       const option = document.createElement('option');
       option.value = '';
-      option.textContent = 'Sin lugares disponibles';
+      option.textContent = 'Sense llocs disponibles';
       guestsSelect.appendChild(option);
       guestsSelect.disabled = true;
       submitBtn.disabled = true;
@@ -112,9 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (result.success) {
-        messageBox.textContent = '¡Reserva realizada con éxito!';
-        messageBox.style.color = 'green';
-        messageBox.style.display = 'block';
+        showToast('¡Reserva realizada con éxito!', true);
         form.reset();
         availability = {};
         afternoonCount.textContent = '23';
@@ -122,9 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         guestsSelect.disabled = true;
         submitBtn.disabled = true;
       } else {
-        messageBox.textContent = result.message || 'Error al registrar reserva.';
-        messageBox.style.color = 'red';
-        messageBox.style.display = 'block';
+        showToast('Error al registrar la reserva', false);
       }
     } catch (error) {
       console.error('Error al enviar reserva:', error);
@@ -135,7 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+function showToast(message, success = true) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.style.backgroundColor = success ? '#28a745' : '#dc3545'; // verde o rojo
+  toast.classList.add('show');
 
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
 
 
 
