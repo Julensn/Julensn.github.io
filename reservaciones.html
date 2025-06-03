@@ -51,7 +51,7 @@
             <!-- Contenedor de información -->
             <div class="reservation-info">
                 <div class="info-box capacity-info">
-                    <h3><i class="fas fa-users"></i> Capacitat per torn</h3>
+                      <h3 class="toggle-title"><i class="fas fa-users"></i> Capacitat per torn</h3>
                     <p>Màxim 23 persones per torn</p>
                     <div class="shift-container">
                         <div class="shift">
@@ -68,7 +68,7 @@
                 </div>
                 
                 <div class="info-box closed-info">
-                    <h3><i class="fas fa-door-closed"></i> Dies tancats</h3>
+                     <h3 class="toggle-title"><i class="fas fa-door-closed"></i> Dies tancats</h3>
                     <p>Dilluns i dimarts</p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="phone">Telèfon:</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Introdueix el teu telèfon">
+                        <input type="tel" id="phone" name="phone" inputmode="numeric" pattern="[0-9]*" required>
                     </div>
                     
                     <div class="form-group">

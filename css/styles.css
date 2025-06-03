@@ -533,7 +533,7 @@ footer p:last-child {
 .reservation-form {
     max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     background: var(--light-bg);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -541,6 +541,7 @@ footer p:last-child {
 
 .reservation-form h2 {
     text-align: center;
+    margin-top: 0;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     font-size: 2rem;

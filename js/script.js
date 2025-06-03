@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (result.success) {
-        showToast('¡Reserva realizada con éxito!', true);
+        showToast('¡Reserva realiztada amb èxit!', true);
         form.reset();
         availability = {};
         afternoonCount.textContent = '23';
