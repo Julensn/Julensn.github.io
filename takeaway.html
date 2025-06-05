@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Take Away - Mitori</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" /> <!-- Aquí tienes tu CSS personalizado -->
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="img/logo.png" alt="Logo de Mitori">
+      </a>
+    </div>
+
+    <button class="menu-toggle" aria-label="Obrir menú" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html">Inici</a></li>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="reservaciones.html">Reservacions</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="max-w-3xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-8">Comanda per emportar - Mitori</h1>
+
+    <form id="pedidoForm" action="https://formspree.io/f/tu-form-id" method="POST" class="space-y-6">
+
+      <!-- Aquí anirán els Acordeons generats per categories amb plats -->
+      <div id="menu-categories" class="space-y-4">
+        <!-- Exemple d'una categoria -->
+        <div class="menu-item border rounded-lg overflow-hidden">
+          <button type="button" class="w-full bg-orange-100 px-4 py-2 text-left font-semibold">🍣 Sushi</button>
+          <div class="hidden p-4 bg-white space-y-3">
+            <div class="flex justify-between items-center">
+              <span>Uramaki salmó - <strong>10€</strong></span>
+              <div class="flex items-center space-x-2">
+                <button type="button" class="restar bg-red-500 text-white px-2 rounded">-</button>
+                <input type="number" name="Uramaki salmó" data-precio="10" value="0" min="0" readonly class="w-12 text-center border rounded">
+                <button type="button" class="sumar bg-green-500 text-white px-2 rounded">+</button>
+              </div>
+            </div>
+            <!-- Afegeix més plats aquí -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="text-right text-xl font-semibold">Total: <span id="totalPedido">€0</span></div>
+
+      <!-- Resum visible -->
+      <div>
+        <h2 class="text-lg font-semibold mb-2">Resum de la comanda</h2>
+        <pre id="resumenVisual" class="bg-gray-100 p-3 rounded-lg text-sm whitespace-pre-wrap"></pre>
+      </div>
+
+      <!-- Mètode de pagament -->
+      <div>
+        <label class="font-semibold">Mètode de pagament:</label>
+        <p class="italic">Pagament al local</p>
+        <input type="hidden" name="metodePagament" value="Pagament al local">
+      </div>
+
+      <!-- Dades del client -->
+      <div class="grid grid-cols-1 gap-4">
+        <div>
+          <label for="nom" class="block font-medium">Nom:</label>
+          <input type="text" name="nom" required class="w-full border rounded p-2">
+        </div>
+        <div>
+          <label for="telefon" class="block font-medium">Telèfon:</label>
+          <input type="tel" name="telefon" required class="w-full border rounded p-2">
+        </div>
+      </div>
+
+      <input type="hidden" name="resumComanda" id="pedidoResumen">
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Enviar comanda</button>
+    </form>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Toggle categories (acordeons)
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+      const button = item.querySelector('button');
+      button.addEventListener('click', () => {
+        item.querySelector('div').classList.toggle('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
