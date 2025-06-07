@@ -582,10 +582,6 @@ footer p:last-child {
     border-left: 4px solid #4CAF50;
 }
 
-.closed-info {
-    border-left: 4px solid #f44336;
-}
-
 .info-box h3 {
     margin-top: 0;
     display: flex;
@@ -749,7 +745,6 @@ button[type="submit"]:hover {
     opacity: 1;
     bottom: 60px;
 }
-
 
 @keyframes spin {
     to {
