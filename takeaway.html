@@ -803,7 +803,12 @@
                 <div class="form-group">
                   <label for="phone">Telèfon:</label>
                   <input type="tel" id="phone" name="phone" class="form-control"
-                    placeholder="Número de telèfon" required>
+                    inputmode="numeric"
+                                pattern="[67][0-9]{8}"
+                                maxlength="9"
+                                minlength="9"
+                                required
+                                placeholder="612345678" required>
                 </div>
 
                 <div class="form-group">
@@ -968,6 +973,9 @@
         
         // Enviar el pedido
         submitBtn.addEventListener('click', () => {
+
+    
+
             if (cart.length === 0) {
                 alert('Si us plau, afegeix productes a la teva comanda abans d\'enviar.');
                 return;
