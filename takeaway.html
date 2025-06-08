@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Take Away - Mitori</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =======================
            VARIABLES GLOBALES
@@ -94,6 +95,88 @@
         }
 
 
+        /* =======================
+   FOOTER
+========================== */
+footer {
+    background: var(--primary-color);
+    /* Ya lo tienes */
+    color: var(--white);
+    /* Ya lo tienes */
+    text-align: center;
+    /* Ya lo tienes */
+    padding: 1rem 1rem;
+    /* Ya lo tienes, puedes ajustar si necesitas más/menos espacio vertical */
+    margin-top: 30px;
+    /* Ya lo tienes */
+}
+
+/* Estilo para el párrafo de la dirección y el enlace */
+footer p {
+    margin-bottom: 0.5rem;
+    /* Añade más espacio debajo de los párrafos */
+}
+
+footer p a {
+    color: var(--white);
+    /* Asegura que el enlace sea blanco */
+    text-decoration: none;
+    /* Quita el subrayado por defecto */
+    border-bottom: 1px solid transparent;
+    /* Prepara para subrayado en hover */
+    transition: border-bottom 0.3s ease;
+}
+
+footer p a:hover {
+    border-bottom: 1px solid var(--white);
+    /* Subrayado blanco al pasar el ratón */
+}
+
+/* Contenedor de los iconos sociales */
+.social-icons {
+    margin-bottom: 1rem;
+    /* Espacio debajo de los iconos */
+    display: flex;
+    /* Usa flexbox para alinear */
+    justify-content: center;
+    /* Centra los iconos */
+    gap: 1.5rem;
+    /* Espacio horizontal ENTRE iconos (ajusta según tu gusto) */
+}
+
+/* Estilo para los enlaces de los iconos */
+.social-icons a {
+    color: var(--white);
+    /* Color uniforme blanco para los iconos */
+    font-size: 1.8rem;
+    /* Haz los iconos más grandes (ajusta el valor) */
+    text-decoration: none;
+    /* Quita cualquier subrayado del enlace */
+    transition: transform 0.3s ease, color 0.3s ease;
+    /* Transición suave */
+}
+
+/* Efecto al pasar el ratón sobre los iconos */
+.social-icons a:hover {
+    transform: scale(1.2);
+    /* Agranda un poco el icono */
+    color: #cccccc;
+    /* Opcional: Cambia ligeramente el color (ej. gris claro) */
+
+}
+
+/* Estilo para el texto de copyright (asegúrate de que use la clase o etiqueta correcta) */
+footer .copyright,
+/* Si añades una clase 'copyright' al párrafo */
+footer p:last-child {
+    /* O selecciona el último párrafo si es siempre el copyright */
+    margin-bottom: 0;
+    /* Quita el margen inferior del último elemento */
+    font-size: 0.9rem;
+    /* Ligeramente más pequeño si quieres */
+    color: #bdc3c7;
+    /* Un gris claro para diferenciarlo un poco */
+}
 
 
         /* =======================
@@ -531,11 +614,40 @@
                 width: 100%;
             }
         }
+
+        /* =======================
+           TOAST
+        ========================== */
         
+        .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #27ae60;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.toast.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900">
-      <form id="pedidoForm" action="https://formspree.io/f/xyzabcd" method="POST"></form>
+    <form id="pedidoForm" action="https://formspree.io/f/xyzabcd"
+      method="POST"></form>
     <header>
       <div class="logo">
         <a href="index.html">
@@ -576,7 +688,8 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Gyozes d'ànec (4 peces) </div>
-                    <div class="item-description">Empanadilles japoneses empanades amb panko, 
+                    <div class="item-description">Empanadilles japoneses
+                      empanades amb panko,
                       amb salsa teriyaki de taronja.
                     </div>
                   </div>
@@ -590,7 +703,8 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Gyozes de pollastre (4 peces) </div>
-                    <div class="item-description">Empanadilles japoneses fregides amb emulsió de salsa anticuchera.</div>
+                    <div class="item-description">Empanadilles japoneses
+                      fregides amb emulsió de salsa anticuchera.</div>
                   </div>
                   <div class="item-price">6,90 €</div>
                   <button class="add-to-cart" data-name="Gyozes de pollastre"
@@ -599,10 +713,11 @@
                   </button>
                 </div>
 
-                 <div class="menu-item">
+                <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Gyozes de verdures (4 peces) </div>
-                    <div class="item-description">Empanadilles japoneses al vapor amb salsa de porc.</div>
+                    <div class="item-description">Empanadilles japoneses al
+                      vapor amb salsa de porc.</div>
                   </div>
                   <div class="item-price">5,90 €</div>
                   <button class="add-to-cart" data-name="Gyozes de verdures"
@@ -694,7 +809,8 @@
               <div class="menu-items">
                 <div class="menu-item">
                   <div class="item-info">
-                    <div class="item-name">Nigiri de peix blanc acevichat (2 peces)</div>
+                    <div class="item-name">Nigiri de peix blanc acevichat (2
+                      peces)</div>
                     <div class="item-description">Peix blanc fresc sobre arròs
                       per a sushi</div>
                   </div>
@@ -708,7 +824,8 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Nigiri de tòfona (2 peces)</div>
-                    <div class="item-description">Amb cítrics de kimchi i làmines de tòfona.</div>
+                    <div class="item-description">Amb cítrics de kimchi i
+                      làmines de tòfona.</div>
                   </div>
                   <div class="item-price">7,40 €</div>
                   <button class="add-to-cart" data-name="Nigiri de tòfona"
@@ -720,7 +837,8 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Anguila fetge (2 peces)</div>
-                    <div class="item-description">Anguila amb fetge caramel·litzat i teriyaki de taronja.</div>
+                    <div class="item-description">Anguila amb fetge
+                      caramel·litzat i teriyaki de taronja.</div>
                   </div>
                   <div class="item-price">8,50 €</div>
                   <button class="add-to-cart" data-name="Anguila fetge"
@@ -732,7 +850,8 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Salmó teriyaki (2 peces)</div>
-                    <div class="item-description">Flambejat amb teriyaki de taronja.</div>
+                    <div class="item-description">Flambejat amb teriyaki de
+                      taronja.</div>
                   </div>
                   <div class="item-price">6,40 €</div>
                   <button class="add-to-cart" data-name="Salmó teriyaki"
@@ -744,7 +863,6 @@
               </div>
             </div>
 
-
             <div class="section">
               <div class="section-title">
                 <span>Hossomakis 🍙</span>
@@ -754,7 +872,9 @@
                 <div class="menu-item">
                   <div class="item-info">
                     <div class="item-name">Tempuritzat tanoshi (8 peces) </div>
-                    <div class="item-description">Hossomaki d'alvocat tempuritzat amb panko, tartar de salmó i cítrics de kimchi.
+                    <div class="item-description">Hossomaki d'alvocat
+                      tempuritzat amb panko, tartar de salmó i cítrics de
+                      kimchi.
 
                     </div>
                   </div>
@@ -792,7 +912,6 @@
                 </div>
               </div>
             </div>
-
 
             <div class="section">
               <div class="section-title">
@@ -878,11 +997,11 @@
                   <label for="phone">Telèfon:</label>
                   <input type="tel" id="phone" name="phone" class="form-control"
                     inputmode="numeric"
-                                pattern="[67][0-9]{8}"
-                                maxlength="9"
-                                minlength="9"
-                                required
-                                placeholder="612345678" required>
+                    pattern="[67][0-9]{8}"
+                    maxlength="9"
+                    minlength="9"
+                    required
+                    placeholder="612345678" required>
                 </div>
 
                 <div class="form-group">
@@ -911,7 +1030,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
+      <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
     </footer>
     <script>
         // Toggle del menú móvil
@@ -1085,5 +1204,5 @@
         // Inicializar el carrito
         updateCart();
     </script>
-</body>
+  </body>
 </html>
