@@ -1,94 +1,1043 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Take Away - Mitori</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css" /> <!-- Aquí tienes tu CSS personalizado -->
-</head>
-<body class="bg-gray-100 text-gray-900">
-  <header>
-    <div class="logo">
-      <a href="index.html">
-        <img src="img/logo.png" alt="Logo de Mitori">
-      </a>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take Away - Mitori</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =======================
+           VARIABLES GLOBALES
+        ========================== */
+        :root {
+            --primary-color: #5E5246;
+            --secondary-color: #5E5246;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #fff;
+            --border-radius: 5px;
+            --border: #e0e0e0;
+        }
 
-    <button class="menu-toggle" aria-label="Obrir menú" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+        /* =======================
+           ESTILOS BASE
+        ========================== */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: #fff;
+        }
 
-    <nav>
-      <ul class="nav-list">
-        <li><a href="index.html">Inici</a></li>
-        <li><a href="menu.html">Menú</a></li>
-        <li><a href="reservaciones.html">Reservacions</a></li>
-      </ul>
-    </nav>
-  </header>
+        /* =======================
+           HEADER & NAVIGATION
+        ========================== */
+        header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            flex-wrap: wrap;
+        }
 
-  <main class="max-w-3xl mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold text-center mb-8">Take Away</h1>
+        .logo img {
+            height: 70px;
+            width: 200px;
+            display: block;
+        }
 
-    <form id="pedidoForm" action="https://formspree.io/f/tu-form-id" method="POST" class="space-y-6">
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+        }
 
-      <!-- Aquí anirán els Acordeons generats per categories amb plats -->
-      <div id="menu-categories" class="space-y-4">
-        <!-- Exemple d'una categoria -->
-        <div class="menu-item border rounded-lg overflow-hidden">
-          <button type="button" class="w-full bg-orange-100 px-4 py-2 text-left font-semibold">🍣 Sushi</button>
-          <div class="hidden p-4 bg-white space-y-3">
-            <div class="flex justify-between items-center">
-              <span>Uramaki salmó - <strong>10€</strong></span>
-              <div class="flex items-center space-x-2">
-                <button type="button" class="restar bg-red-500 text-white px-2 rounded">-</button>
-                <input type="number" name="Uramaki salmó" data-precio="10" value="0" min="0" readonly class="w-12 text-center border rounded">
-                <button type="button" class="sumar bg-green-500 text-white px-2 rounded">+</button>
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            transition: background 0.3s;
+            border-radius: var(--border-radius);
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--secondary-color);
+        }
+
+        /* =======================
+           MAIN CONTENT
+        ========================== */
+        main {
+            padding: 20px;
+        }
+
+        /* =======================
+           TAKE AWAY MENU STYLES
+        ========================== */
+        .menu-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .menu-section h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .menu-section p {
+            color: #777;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .menu-column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cart-column {
+            width: 350px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            background: white;
+            color: var(--primary-color);
+            padding: 16px 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title i {
+            transition: transform 0.3s ease;
+            color: var(--accent-color);
+        }
+
+        .section.active .section-title i {
+            transform: rotate(180deg);
+        }
+
+        .section-title:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-items {
+            display: none;
+            padding: 0;
+        }
+
+        .section.active .menu-items {
+            display: block;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: #f8f9fa;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-left: 15px;
+            min-width: 70px;
+            text-align: right;
+        }
+
+        .add-to-cart {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 15px;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .add-to-cart:hover {
+            background: #c0392b;
+        }
+
+        /* Cart Styles */
+        .cart-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .quantity-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .payment-method {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .payment-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .payment-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option.selected {
+            border-color: var(--accent-color);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .payment-option i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+
+        .order-form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .total-section {
+            padding: 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .total-price {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .green-text {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* =======================
+           FOOTER
+        ========================== */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem 1rem;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer p a {
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        footer p a:hover {
+            border-bottom: 1px solid var(--white);
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #cccccc;
+        }
+
+        footer .copyright,
+        footer p:last-child {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        /* =======================
+           RESPONSIVE
+        ========================== */
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .cart-column {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                position: relative;
+                z-index: 1001;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 100%;
+                background-color: var(--primary-color);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+                padding-top: 4rem;
+                overflow-y: auto;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+                z-index: 1100;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 10px;
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background-color: var(--white);
+                margin: 5px 0;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: left;
+                padding-left: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 1rem 0;
+                color: var(--white);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .item-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+        }
+        
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <header>
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/logo.png" alt="Logo de Mitori">
+        </a>
+      </div>
+
+      <button class="menu-toggle" aria-label="Obrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Inici</a></li>
+          <li><a href="menu.html">Menú</a></li>
+          <li><a href="reservaciones.html">Reservacions</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="menu-section">
+        <h1>Menú Take Away</h1>
+        <p>Disfruta de la millor cuina japonesa a casa teva</p>
+      </section>
+
+      <div class="container">
+        <div class="main-content">
+          <div class="menu-column">
+            <div class="section">
+              <div class="section-title">
+                <span>Entrants</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-items">
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Panipuri de salmó</div>
+                    <div class="item-description">Cruixent indi farcit amb
+                      tartar de salmó</div>
+                  </div>
+                  <div class="item-price">3,50 €</div>
+                  <button class="add-to-cart" data-name="Panipuri de salmó"
+                    data-price="3.50">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Panipuri de tonyina</div>
+                    <div class="item-description">Cruixent indi farcit amb
+                      tartar de tonyina</div>
+                  </div>
+                  <div class="item-price">3,50 €</div>
+                  <button class="add-to-cart" data-name="Panipuri de tonyina"
+                    data-price="3.50">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Edamame picant</div>
+                    <div class="item-description">Vaines de soja verdes amb
+                      salsa picant</div>
+                  </div>
+                  <div class="item-price">5,40 €</div>
+                  <button class="add-to-cart" data-name="Edamame picant"
+                    data-price="5.40">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Edamame trufat</div>
+                    <div class="item-description">Vaines de soja verdes amb toc
+                      de tòfona</div>
+                  </div>
+                  <div class="item-price">5,50 €</div>
+                  <button class="add-to-cart" data-name="Edamame trufat"
+                    data-price="5.50">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <!-- Afegeix més plats aquí -->
+
+            <div class="section">
+              <div class="section-title">
+                <span>Plats Principals</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-items">
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Yakisoba de vedella</div>
+                    <div class="item-description">Amb barreja de verdures i daus
+                      de vedella</div>
+                  </div>
+                  <div class="item-price">11,90 €</div>
+                  <button class="add-to-cart" data-name="Yakisoba de vedella"
+                    data-price="11.90">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Yakisoba de pollastre</div>
+                    <div class="item-description">Pollastre empanat amb panko i
+                      verdures</div>
+                  </div>
+                  <div class="item-price">12,90 €</div>
+                  <button class="add-to-cart" data-name="Yakisoba de pollastre"
+                    data-price="12.90">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Yakisoba de llagosta</div>
+                    <div class="item-description">Cues de llagostí amb barreja
+                      de verdures</div>
+                  </div>
+                  <div class="item-price">12,90 €</div>
+                  <button class="add-to-cart" data-name="Yakisoba de llagosta"
+                    data-price="12.90">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-title">
+                <span>Sushi</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-items">
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Nigiri de peix blanc</div>
+                    <div class="item-description">Peix blanc fresc sobre arròs
+                      per a sushi</div>
+                  </div>
+                  <div class="item-price">6,50 €</div>
+                  <button class="add-to-cart" data-name="Nigiri de peix blanc"
+                    data-price="6.50">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Nigiri de tonyina</div>
+                    <div class="item-description">Tonyina fresca sobre arròs per
+                      a sushi</div>
+                  </div>
+                  <div class="item-price">6,90 €</div>
+                  <button class="add-to-cart" data-name="Nigiri de tonyina"
+                    data-price="6.90">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Maki de tonyina</div>
+                    <div class="item-description">Enrotllament de tonyina amb
+                      arròs i alga nori</div>
+                  </div>
+                  <div class="item-price">8,50 €</div>
+                  <button class="add-to-cart" data-name="Maki de tonyina"
+                    data-price="8.50">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-title">
+                <span>Postres</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-items">
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Mochi de mango i passiflora</div>
+                    <div class="item-description">Mochi farcit amb crema de
+                      mango i passiflora</div>
+                  </div>
+                  <div class="item-price">4,00 €</div>
+                  <button class="add-to-cart"
+                    data-name="Mochi de mango i passiflora" data-price="4.00">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Mochi de matcha</div>
+                    <div class="item-description">Mochi amb farciment de crema
+                      de te verd</div>
+                  </div>
+                  <div class="item-price">4,00 €</div>
+                  <button class="add-to-cart" data-name="Mochi de matcha"
+                    data-price="4.00">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+
+                <div class="menu-item">
+                  <div class="item-info">
+                    <div class="item-name">Mochi de cheesecake</div>
+                    <div class="item-description">Mochi amb farciment de crema
+                      de formatge</div>
+                  </div>
+                  <div class="item-price">4,00 €</div>
+                  <button class="add-to-cart" data-name="Mochi de cheesecake"
+                    data-price="4.00">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-column">
+            <div class="cart-container">
+              <div class="cart-header">
+                Resum del comanda
+              </div>
+
+              <div class="cart-items" id="orderItems">
+                <div class="empty-cart">
+                  <i class="fas fa-shopping-cart"
+                    style="font-size: 3rem; opacity: 0.3; margin-bottom: 15px;"></i>
+                  <p>La teva comanda està buida</p>
+                  <p class="green-text">Afegeix productes per començar</p>
+                </div>
+              </div>
+
+              <div class="payment-method">
+                <div class="payment-title">Mètode de pagament:</div>
+                <div class="payment-options">
+                  <div class="payment-option selected" id="payInStore">
+                    <i class="fas fa-store"></i>
+                    <div>Pagament al local</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-form">
+                <div class="form-group">
+                  <label for="name">El teu nom:</label>
+                  <input type="text" id="name" name="name" class="form-control"
+                    placeholder="Nom complet" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Telèfon:</label>
+                  <input type="tel" id="phone" name="phone" class="form-control"
+                    placeholder="Número de telèfon" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="notes">Notes addicionals:</label>
+                  <textarea id="notes" name="notes" class="form-control"
+                    rows="2"
+                    placeholder="Al·lèrgies, instruccions especials..."></textarea>
+                </div>
+              </div>
+
+              <div class="total-section">
+                <div>Total:</div>
+                <div class="total-price" id="totalPrice">0,00 €</div>
+              </div>
+
+              <div class="order-form" style="padding-top: 0;">
+                <button class="submit-btn" id="submitOrder">
+                  <i class="fas fa-paper-plane"></i>
+                  Enviar comanda
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </main>
 
-      <!-- Total -->
-      <div class="text-right text-xl font-semibold">Total: <span id="totalPedido">€0</span></div>
-
-      <!-- Resum visible -->
-      <div>
-        <h2 class="text-lg font-semibold mb-2">Resum de la comanda</h2>
-        <pre id="resumenVisual" class="bg-gray-100 p-3 rounded-lg text-sm whitespace-pre-wrap"></pre>
+    <footer>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
-
-      <!-- Mètode de pagament -->
-      <div>
-        <label class="font-semibold">Mètode de pagament:</label>
-        <p class="italic">Pagament al local</p>
-        <input type="hidden" name="metodePagament" value="Pagament al local">
-      </div>
-
-      <!-- Dades del client -->
-      <div class="grid grid-cols-1 gap-4">
-        <div>
-          <label for="nom" class="block font-medium">Nom:</label>
-          <input type="text" name="nom" required class="w-full border rounded p-2">
-        </div>
-        <div>
-          <label for="telefon" class="block font-medium">Telèfon:</label>
-          <input type="tel" name="telefon" required class="w-full border rounded p-2">
-        </div>
-      </div>
-
-      <input type="hidden" name="resumComanda" id="pedidoResumen">
-
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Enviar comanda</button>
-    </form>
-  </main>
-
-  <script src="js/script.js"></script>
-
+      <p>Carrer Sushi, 23 - Barcelona</p>
+      <p>Tel: 93 123 45 67</p>
+      <p class="copyright">© 2023 Mitori Sushi - Tots els drets reservats</p>
+    </footer>
+    <script>
+        // Toggle del menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Acordeones para las secciones del menú
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const section = title.parentElement;
+                section.classList.toggle('active');
+            });
+        });
+        
+        // Carrito de compras
+        let cart = [];
+        const orderItemsEl = document.getElementById('orderItems');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const submitBtn = document.getElementById('submitOrder');
+        
+        // Función para añadir productos al carrito
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                
+                // Verificar si el producto ya está en el carrito
+                const existingItem = cart.find(item => item.name === name);
+                
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({
+                        name: name,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Animación de confirmación
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-plus"></i>';
+                }, 1000);
+            });
+        });
+        
+        // Actualizar el carrito
+        function updateCart() {
+            // Limpiar el carrito
+            orderItemsEl.innerHTML = '';
+            
+            if (cart.length === 0) {
+                orderItemsEl.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; opacity: 0.3; margin-bottom: 15px;"></i>
+                        <p>La teva comanda està buida</p>
+                        <p class="green-text">Afegeix productes per començar</p>
+                    </div>
+                `;
+                totalPriceEl.textContent = '0,00 €';
+                return;
+            }
+            
+            // Calcular el total
+            let total = 0;
+            
+            // Añadir cada elemento al carrito
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrease" data-name="${item.name}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn increase" data-name="${item.name}">+</button>
+                            <button class="remove-btn" data-name="${item.name}">Eliminar</button>
+                        </div>
+                    </div>
+                    <div class="item-price">${itemTotal.toFixed(2)} €</div>
+                `;
+                
+                orderItemsEl.appendChild(itemEl);
+            });
+            
+            // Actualizar el total
+            totalPriceEl.textContent = total.toFixed(2) + ' €';
+            
+            // Añadir eventos para los botones de cantidad y eliminar
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    const item = cart.find(item => item.name === name);
+                    
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        cart = cart.filter(item => item.name !== name);
+                    }
+                    
+                    updateCart();
+                });
+            });
+            
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    const item = cart.find(item => item.name === name);
+                    item.quantity++;
+                    updateCart();
+                });
+            });
+            
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    cart = cart.filter(item => item.name !== name);
+                    updateCart();
+                });
+            });
+        }
+        
+        // Enviar el pedido
+        submitBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Si us plau, afegeix productes a la teva comanda abans d\'enviar.');
+                return;
+            }
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (!name || !phone) {
+                alert('Si us plau, omple el teu nom i telèfon.');
+                return;
+            }
+            
+            // Preparar detalles del pedido
+            let orderDetails = `Nou comanda de: ${name}\nTelèfon: ${phone}\n\nComanda:\n\n`;
+            
+            cart.forEach(item => {
+                orderDetails += `${item.quantity} x ${item.name} - ${(item.price * item.quantity).toFixed(2)} €\n`;
+            });
+            
+            orderDetails += `\nTotal: ${totalPriceEl.textContent}`;
+            
+            // Aquí normalmente enviarías el pedido a un servidor
+            alert(`Comanda enviada amb èxit!\n\n${orderDetails}`);
+            
+            // Resetear el carrito
+            cart = [];
+            updateCart();
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('notes').value = '';
+        });
+        
+        // Inicializar el carrito
+        updateCart();
+    </script>
 </body>
 </html>
