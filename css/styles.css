@@ -4,7 +4,7 @@
 :root {
     --primary-color: #5E5246;
     --secondary-color: #5E5246;
-    --accent-color: #e74c3c;
+    --accent-color: #ec5d0f;
     --text-color: #333;
     --light-bg: #f9f9f9;
     --white: #fff;
@@ -222,7 +222,7 @@ main {
 }
 
 .experience-icon {
-    color: #e74c3c;
+    color: #ec5d0f;
     margin-bottom: 1.5rem;
 }
 
