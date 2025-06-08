@@ -535,6 +535,7 @@
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900">
+      <form id="pedidoForm" action="https://formspree.io/f/xyzabcd" method="POST"></form>
     <header>
       <div class="logo">
         <a href="index.html">
@@ -1071,8 +1072,7 @@
             
             orderDetails += `\nTotal: ${totalPriceEl.textContent}`;
             
-            // Aquí normalmente enviarías el pedido a un servidor
-            alert(`Comanda enviada amb èxit!\n\n${orderDetails}`);
+           
             
             // Resetear el carrito
             cart = [];
