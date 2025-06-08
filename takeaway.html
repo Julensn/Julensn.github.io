@@ -74,6 +74,28 @@
             background: var(--secondary-color);
         }
 
+
+            /* Menú hamburguesa oculto por defecto */
+        .menu-toggle {
+            display: none; /* Oculto en desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+
+
+
         /* =======================
            MAIN CONTENT
         ========================== */
