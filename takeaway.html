@@ -646,8 +646,6 @@ footer p:last-child {
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900">
-    <form id="pedidoForm" action="https://formspree.io/f/xyzabcd"
-      method="POST"></form>
     <header>
       <div class="logo">
         <a href="index.html">
@@ -986,48 +984,51 @@ footer p:last-child {
                 </div>
               </div>
 
-              <div class="order-form">
-                <div class="form-group">
-                  <label for="name">El teu nom:</label>
-                  <input type="text" id="name" name="name" class="form-control"
-                    placeholder="Nom complet" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="phone">Telèfon:</label>
-                  <input type="tel" id="phone" name="phone" class="form-control"
-                    inputmode="numeric"
-                    pattern="[67][0-9]{8}"
-                    maxlength="9"
-                    minlength="9"
-                    required
-                    placeholder="612345678" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="notes">Notes addicionals:</label>
-                  <textarea id="notes" name="notes" class="form-control"
-                    rows="2"
-                    placeholder="Al·lèrgies, instruccions especials..."></textarea>
-                </div>
-              </div>
-
-              <div class="total-section">
-                <div>Total:</div>
-                <div class="total-price" id="totalPrice">0,00 €</div>
-              </div>
-
-              <div class="order-form" style="padding-top: 0;">
-                <button class="submit-btn" id="submitOrder">
-                  <i class="fas fa-paper-plane"></i>
-                  Enviar comanda
-                </button>
-              </div>
+                <!-- FORMULARIO PARA FORMSPREE -->
+                <form id="orderForm" action="https://formspree.io/f/xqkrqkqp" method="POST">
+                    <div class="order-form">
+                        <div class="form-group">
+                            <label for="name">El teu nom:</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Nom complet" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telèfon:</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Número de telèfon" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Notes addicionals:</label>
+                            <textarea id="notes" name="notes" class="form-control" rows="2" placeholder="Al·lèrgies, instruccions especials..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="total-section">
+                        <div>Total:</div>
+                        <div class="total-price" id="totalPrice">0,00 €</div>
+                    </div>
+                    
+                    <div class="order-form" style="padding-top: 0;">
+                        <button type="submit" class="submit-btn" id="submitOrder">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar comanda
+                        </button>
+                    </div>
+                    
+                    <!-- Campos ocultos para enviar los detalles del pedido -->
+                    <input type="hidden" id="orderDetails" name="orderDetails">
+                    <input type="hidden" id="orderTotal" name="orderTotal">
+                </form>
             </div>
-          </div>
         </div>
-      </div>
     </main>
+
+                <!-- TOAST DE CONFIRMACIÓN -->
+                <div class="toast" id="confirmationToast">
+                <i class="fas fa-check-circle"></i>
+                <div>Comanda enviada amb èxit!</div>
+              </div>
+            
 
     <footer>
       <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
