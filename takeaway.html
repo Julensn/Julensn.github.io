@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Take Away - Mitori</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,7 +19,7 @@
             --primary-color: #5E5246;
             --secondary-color: #5E5246;
             --accent-color: #e74c3c;
-            --text-color: #333;
+            --text-color: #000000;
             --light-bg: #f9f9f9;
             --white: #fff;
             --border-radius: 5px;
@@ -25,7 +30,7 @@
            ESTILOS BASE
         ========================== */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -132,38 +137,6 @@ footer p a:hover {
     /* Subrayado blanco al pasar el ratón */
 }
 
-/* Contenedor de los iconos sociales */
-.social-icons {
-    margin-bottom: 1rem;
-    /* Espacio debajo de los iconos */
-    display: flex;
-    /* Usa flexbox para alinear */
-    justify-content: center;
-    /* Centra los iconos */
-    gap: 1.5rem;
-    /* Espacio horizontal ENTRE iconos (ajusta según tu gusto) */
-}
-
-/* Estilo para los enlaces de los iconos */
-.social-icons a {
-    color: var(--white);
-    /* Color uniforme blanco para los iconos */
-    font-size: 1.8rem;
-    /* Haz los iconos más grandes (ajusta el valor) */
-    text-decoration: none;
-    /* Quita cualquier subrayado del enlace */
-    transition: transform 0.3s ease, color 0.3s ease;
-    /* Transición suave */
-}
-
-/* Efecto al pasar el ratón sobre los iconos */
-.social-icons a:hover {
-    transform: scale(1.2);
-    /* Agranda un poco el icono */
-    color: #cccccc;
-    /* Opcional: Cambia ligeramente el color (ej. gris claro) */
-
-}
 
 /* Estilo para el texto de copyright (asegúrate de que use la clase o etiqueta correcta) */
 footer .copyright,
@@ -301,7 +274,7 @@ footer p:last-child {
         }
 
         .item-description {
-            color: #666;
+            color: #000000;
             font-size: 0.9rem;
             margin-top: 4px;
         }
@@ -643,7 +616,45 @@ footer p:last-child {
 }
 
 
-    </style>
+    
+/* Controles móviles per a cada producte */
+.item-mobile-controls {
+  display: none;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .add-to-cart {
+    display: none !important;
+  }
+
+  .item-mobile-controls {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
+
+  .item-mobile-controls .quantity-btn,
+  .item-mobile-controls .remove-btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+}
+
+
+/* Fuente decorativa para títulos y textos destacados */
+h1, h2, h3, h4, h5, h6,
+.menu-section h1,
+.section-title,
+.cart-header,
+.payment-title,
+.total-section div:first-child,
+.submit-btn {
+    font-family: 'Dancing Script', cursive;
+}
+
+</style>
   </head>
   <body class="bg-gray-100 text-gray-900">
     <header>
@@ -1133,6 +1144,35 @@ footer p:last-child {
         // Actualizar el total
         totalPriceEl.textContent = total.toFixed(2) + ' €';
         
+        
+    // Sincronizar controles móviles (si existen)
+    document.querySelectorAll('.item-mobile-controls').forEach(control => {
+      const name = control.querySelector('.decrease').getAttribute('data-name');
+
+      control.querySelector('.decrease').onclick = () => {
+        const item = cart.find(item => item.name === name);
+        if (item && item.quantity > 1) {
+          item.quantity--;
+        } else {
+          cart = cart.filter(item => item.name !== name);
+        }
+        updateCart();
+      };
+
+      control.querySelector('.increase').onclick = () => {
+        const item = cart.find(item => item.name === name);
+        if (item) item.quantity++;
+        else cart.push({ name, price: parseFloat(control.getAttribute('data-price')), quantity: 1 });
+        updateCart();
+      };
+
+      control.querySelector('.remove-btn').onclick = () => {
+        cart = cart.filter(item => item.name !== name);
+        updateCart();
+      };
+    });
+
+
         // Añadir eventos para los botones de cantidad y eliminar
         document.querySelectorAll('.decrease').forEach(button => {
             button.addEventListener('click', () => {
