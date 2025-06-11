@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Take Away - Mitori Sushi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,7 +18,7 @@
             --primary-color: #5E5246;
             --secondary-color: #5E5246;
             --accent-color: #e74c3c;
-            --text-color: #333;
+            --text-color: #000000;
             --light-bg: #f9f9f9;
             --white: #fff;
             --border-radius: 5px;
@@ -25,7 +29,7 @@
            ESTILOS BASE
         ========================== */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -220,7 +224,7 @@
         }
 
         .item-description {
-            color: #666;
+            color: #000000;
             font-size: 0.9rem;
             margin-top: 4px;
         }
@@ -462,25 +466,6 @@
             border-bottom: 1px solid var(--white);
         }
 
-        .social-icons {
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .social-icons a {
-            color: var(--white);
-            font-size: 1.8rem;
-            text-decoration: none;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            transform: scale(1.2);
-            color: #cccccc;
-        }
-
         footer .copyright,
         footer p:last-child {
             margin-bottom: 0;
@@ -598,6 +583,17 @@
                 width: 100%;
             }
         }
+
+        * Fuente decorativa para títulos y textos destacados */
+h1, h2, h3, h4, h5, h6,
+.menu-section h1,
+.section-title,
+.cart-header,
+.payment-title,
+.total-section div:first-child,
+.submit-btn {
+    font-family: 'Dancing Script', cursive;
+}
     </style>
   </head>
   <body class="bg-gray-100 text-gray-900">
@@ -625,8 +621,8 @@
 
     <main>
       <section class="menu-section">
-        <h1>Menú Take Away</h1>
-        <p>Disfruta de la millor cuina japonesa a casa teva</p>
+        <h1>Take Away</h1>
+
       </section>
 
       <div class="container">
