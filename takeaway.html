@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="ca">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Take Away - Mitori</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Take Away - Mitori Sushi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =======================
            VARIABLES GLOBALES
@@ -19,7 +13,7 @@
             --primary-color: #5E5246;
             --secondary-color: #5E5246;
             --accent-color: #e74c3c;
-            --text-color: #000000;
+            --text-color: #333;
             --light-bg: #f9f9f9;
             --white: #fff;
             --border-radius: 5px;
@@ -30,7 +24,7 @@
            ESTILOS BASE
         ========================== */
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -39,7 +33,7 @@
         }
 
         /* =======================
-           HEADER & NAVIGATION
+           HEADER & NAVIGATION - CORREGIDO
         ========================== */
         header {
             background: var(--primary-color);
@@ -56,6 +50,11 @@
             height: 70px;
             width: 200px;
             display: block;
+        }
+
+        nav {
+            display: block;
+            transform: translateX(0);
         }
 
         nav ul {
@@ -80,8 +79,7 @@
             background: var(--secondary-color);
         }
 
-
-            /* Menú hamburguesa oculto por defecto */
+        /* Menú hamburguesa oculto por defecto */
         .menu-toggle {
             display: none; /* Oculto en desktop */
             background: none;
@@ -98,59 +96,6 @@
             margin: 5px 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
-
-        /* =======================
-   FOOTER
-========================== */
-footer {
-    background: var(--primary-color);
-    /* Ya lo tienes */
-    color: var(--white);
-    /* Ya lo tienes */
-    text-align: center;
-    /* Ya lo tienes */
-    padding: 1rem 1rem;
-    /* Ya lo tienes, puedes ajustar si necesitas más/menos espacio vertical */
-    margin-top: 30px;
-    /* Ya lo tienes */
-}
-
-/* Estilo para el párrafo de la dirección y el enlace */
-footer p {
-    margin-bottom: 0.5rem;
-    /* Añade más espacio debajo de los párrafos */
-}
-
-footer p a {
-    color: var(--white);
-    /* Asegura que el enlace sea blanco */
-    text-decoration: none;
-    /* Quita el subrayado por defecto */
-    border-bottom: 1px solid transparent;
-    /* Prepara para subrayado en hover */
-    transition: border-bottom 0.3s ease;
-}
-
-footer p a:hover {
-    border-bottom: 1px solid var(--white);
-    /* Subrayado blanco al pasar el ratón */
-}
-
-
-/* Estilo para el texto de copyright (asegúrate de que use la clase o etiqueta correcta) */
-footer .copyright,
-/* Si añades una clase 'copyright' al párrafo */
-footer p:last-child {
-    /* O selecciona el último párrafo si es siempre el copyright */
-    margin-bottom: 0;
-    /* Quita el margen inferior del último elemento */
-    font-size: 0.9rem;
-    /* Ligeramente más pequeño si quieres */
-    color: #bdc3c7;
-    /* Un gris claro para diferenciarlo un poco */
-}
-
 
         /* =======================
            MAIN CONTENT
@@ -274,7 +219,7 @@ footer p:last-child {
         }
 
         .item-description {
-            color: #000000;
+            color: #666;
             font-size: 0.9rem;
             margin-top: 4px;
         }
@@ -490,10 +435,60 @@ footer p:last-child {
             font-weight: 600;
         }
 
-      
+        /* =======================
+           FOOTER
+        ========================== */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem 1rem;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer p a {
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        footer p a:hover {
+            border-bottom: 1px solid var(--white);
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #cccccc;
+        }
+
+        footer .copyright,
+        footer p:last-child {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
 
         /* =======================
-           RESPONSIVE
+           RESPONSIVE - CORREGIDO
         ========================== */
         @media (max-width: 900px) {
             .main-content {
@@ -533,25 +528,13 @@ footer p:last-child {
                 transform: translateX(0);
             }
 
+            /* Mostrar menú hamburguesa solo en móvil */
             .menu-toggle {
                 display: block;
                 position: absolute;
                 top: 1rem;
                 left: 1rem;
                 z-index: 1100;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 10px;
-            }
-
-            .menu-toggle span {
-                display: block;
-                width: 25px;
-                height: 3px;
-                background-color: var(--white);
-                margin: 5px 0;
-                transition: transform 0.3s ease, opacity 0.3s ease;
             }
 
             nav ul {
@@ -587,74 +570,7 @@ footer p:last-child {
                 width: 100%;
             }
         }
-
-        /* =======================
-           TOAST
-        ========================== */
-        
-        .toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #27ae60;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 10000;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.toast.active {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-
-    
-/* Controles móviles per a cada producte */
-.item-mobile-controls {
-  display: none;
-  margin-top: 10px;
-  gap: 10px;
-}
-
-@media (max-width: 768px) {
-  .add-to-cart {
-    display: none !important;
-  }
-
-  .item-mobile-controls {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-  }
-
-  .item-mobile-controls .quantity-btn,
-  .item-mobile-controls .remove-btn {
-    font-size: 0.8rem;
-    padding: 4px 8px;
-  }
-}
-
-
-/* Fuente decorativa para títulos y textos destacados */
-h1, h2, h3, h4, h5, h6,
-.menu-section h1,
-.section-title,
-.cart-header,
-.payment-title,
-.total-section div:first-child,
-.submit-btn {
-    font-family: 'Dancing Script', cursive;
-}
-
-</style>
+    </style>
   </head>
   <body class="bg-gray-100 text-gray-900">
     <header>
@@ -1145,45 +1061,6 @@ h1, h2, h3, h4, h5, h6,
         totalPriceEl.textContent = total.toFixed(2) + ' €';
         
         
-        // Agregar eventos a los botones de +, -
-document.querySelectorAll('.item-mobile-controls .quantity-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    const name = button.parentElement.getAttribute('data-name');
-    const price = parseFloat(button.parentElement.getAttribute('data-price'));
-    const quantityEl = button.parentElement.querySelector('.quantity');
-    let quantity = parseInt(quantityEl.textContent);
-
-    if (button.classList.contains('decrease')) {
-      if (quantity > 0) {
-        quantity--;
-        const item = cart.find(item => item.name === name);
-        if (item) {
-          item.quantity--;
-          if (item.quantity === 0) {
-            cart = cart.filter(item => item.name !== name);
-          }
-        }
-      }
-    } else {
-      quantity++;
-      const existingItem = cart.find(item => item.name === name);
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cart.push({
-          name: name,
-          price: price,
-          quantity: 1
-        });
-      }
-    }
-
-    quantityEl.textContent = quantity;
-    updateCart();
-  });
-});
-
-
     // Sincronizar controles móviles (si existen)
     document.querySelectorAll('.item-mobile-controls').forEach(control => {
       const name = control.querySelector('.decrease').getAttribute('data-name');
