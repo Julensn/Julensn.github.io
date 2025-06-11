@@ -430,7 +430,7 @@ footer p:last-child {
         }
 
         .form-control {
-            width: 90%;
+            width: 100%;
             padding: 12px;
             border: 1px solid var(--border);
             border-radius: 5px;
@@ -682,7 +682,7 @@ h1, h2, h3, h4, h5, h6,
     <main>
       <section class="menu-section">
         <h1>Menú Take Away</h1>
-        
+        <p>Disfruta de la millor cuina japonesa a casa teva</p>
       </section>
 
       <div class="container">
@@ -1145,6 +1145,45 @@ h1, h2, h3, h4, h5, h6,
         totalPriceEl.textContent = total.toFixed(2) + ' €';
         
         
+        // Agregar eventos a los botones de +, -
+document.querySelectorAll('.item-mobile-controls .quantity-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const name = button.parentElement.getAttribute('data-name');
+    const price = parseFloat(button.parentElement.getAttribute('data-price'));
+    const quantityEl = button.parentElement.querySelector('.quantity');
+    let quantity = parseInt(quantityEl.textContent);
+
+    if (button.classList.contains('decrease')) {
+      if (quantity > 0) {
+        quantity--;
+        const item = cart.find(item => item.name === name);
+        if (item) {
+          item.quantity--;
+          if (item.quantity === 0) {
+            cart = cart.filter(item => item.name !== name);
+          }
+        }
+      }
+    } else {
+      quantity++;
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
+    }
+
+    quantityEl.textContent = quantity;
+    updateCart();
+  });
+});
+
+
     // Sincronizar controles móviles (si existen)
     document.querySelectorAll('.item-mobile-controls').forEach(control => {
       const name = control.querySelector('.decrease').getAttribute('data-name');
