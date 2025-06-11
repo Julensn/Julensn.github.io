@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Take Away - Mitori Sushi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =======================
            VARIABLES GLOBALES
@@ -375,7 +376,7 @@
         }
 
         .form-control {
-            width: 100%;
+            width: 90%;
             padding: 12px;
             border: 1px solid var(--border);
             border-radius: 5px;
@@ -486,6 +487,33 @@
             font-size: 0.9rem;
             color: #bdc3c7;
         }
+
+          /* =======================
+           TOAST
+        ========================== */
+        
+        .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #27ae60;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.toast.active {
+    transform: translateY(0);
+    opacity: 1;
+}
 
         /* =======================
            RESPONSIVE - CORREGIDO
@@ -911,56 +939,60 @@
                 </div>
               </div>
 
-                <!-- FORMULARIO PARA FORMSPREE -->
-                <form id="orderForm" action="https://formspree.io/f/xqkrqkqp" method="POST">
-                    <div class="order-form">
-                        <div class="form-group">
-                            <label for="name">El teu nom:</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Nom complet" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Telèfon:</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Número de telèfon" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="notes">Notes addicionals:</label>
-                            <textarea id="notes" name="notes" class="form-control" rows="2" placeholder="Al·lèrgies, instruccions especials..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="total-section">
-                        <div>Total:</div>
-                        <div class="total-price" id="totalPrice">0,00 €</div>
-                    </div>
-                    
-                    <div class="order-form" style="padding-top: 0;">
-                        <button type="submit" class="submit-btn" id="submitOrder">
-                            <i class="fas fa-paper-plane"></i>
-                            Enviar comanda
-                        </button>
-                    </div>
-                    
-                    <!-- Campos ocultos para enviar los detalles del pedido -->
-                    <input type="hidden" id="orderDetails" name="orderDetails">
-                    <input type="hidden" id="orderTotal" name="orderTotal">
-                </form>
+              <!-- FORMULARIO PARA FORMSPREE -->
+              <form id="orderForm" action="https://formspree.io/f/mpwdbjoy"
+                method="POST">
+                <div class="order-form">
+                  <div class="form-group">
+                    <label for="name">El teu nom:</label>
+                    <input type="text" id="name" name="name"
+                      class="form-control" placeholder="Nom complet" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone">Telèfon:</label>
+                    <input type="tel" id="phone" name="phone"
+                      class="form-control" placeholder="Número de telèfon"
+                      required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="notes">Notes addicionals:</label>
+                    <textarea id="notes" name="notes" class="form-control"
+                      rows="2"
+                      placeholder="Al·lèrgies, instruccions especials..."></textarea>
+                  </div>
+                </div>
+
+                <div class="total-section">
+                  <div>Total:</div>
+                  <div class="total-price" id="totalPrice">0,00 €</div>
+                </div>
+
+                <div class="order-form" style="padding-top: 0;">
+                  <button type="submit" class="submit-btn" id="submitOrder">
+                    <i class="fas fa-paper-plane"></i>
+                    Enviar comanda
+                  </button>
+                </div>
+
+                <!-- Campos ocultos para enviar los detalles del pedido -->
+                <input type="hidden" id="orderDetails" name="orderDetails">
+                <input type="hidden" id="orderTotal" name="orderTotal">
+              </form>
             </div>
-        </div>
-    </main>
+          </div>
+          <!-- TOAST DE CONFIRMACIÓN -->
+          <div class="toast" id="confirmationToast">
+            <i class="fas fa-check-circle"></i>
+            <div>Comanda enviada amb èxit!</div>
+          </div>
 
-                <!-- TOAST DE CONFIRMACIÓN -->
-                <div class="toast" id="confirmationToast">
-                <i class="fas fa-check-circle"></i>
-                <div>Comanda enviada amb èxit!</div>
-              </div>
-            
-
-    <footer>
-      <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
-    </footer>
-    <script>
+        </main>
+        <footer>
+          <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
+        </footer>
+        <script>
 // Toggle del menú móvil
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
@@ -1125,9 +1157,9 @@
     
     // Función para mostrar el toast de confirmación
     function showToast(message, isSuccess = true) {
-        const toast = document.getElementById('confirmationToast');
-        const toastIcon = toast.querySelector('i');
-        const toastMessage = toast.querySelector('.toast-message');
+    const toast = document.getElementById('confirmationToast');
+    const toastIcon = toast.querySelector('i');
+    const toastMessage = toast.querySelector('div:nth-child(2)'); // Corregido aquí
         
         // Configurar según el tipo de mensaje
         if (isSuccess) {
@@ -1149,65 +1181,63 @@
     
     // Manejar el envío del formulario a Formspree
     document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (cart.length === 0) {
-            showToast('Si us plau, afegeix productes a la teva comanda', false);
-            return;
-        }
-        
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        
-        if (!name || !phone) {
-            showToast('Si us plau, omple el teu nom i telèfon', false);
-            return;
-        }
-        
-        // Preparar detalles del pedido
-        let orderDetails = `Comanda de: ${name}\nTelèfon: ${phone}\n\nDetalls de la comanda:\n\n`;
-        
-        cart.forEach(item => {
-            orderDetails += `${item.quantity} x ${item.name} - ${(item.price * item.quantity).toFixed(2)} €\n`;
-        });
-        
-        orderDetails += `\nTotal: ${document.getElementById('totalPrice').textContent}`;
-        
-        // Actualizar campos ocultos
-        document.getElementById('orderDetails').value = orderDetails;
-        document.getElementById('orderTotal').value = document.getElementById('totalPrice').textContent;
-        
-        // Crear un objeto FormData con todos los campos del formulario
-        const formData = new FormData(this);
-        
-        // Enviar el formulario usando fetch
-        fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                // Mostrar toast de confirmación
-                showToast('Comanda enviada amb èxit!');
-                
-                // Resetear el carrito y el formulario
-                cart = [];
-                updateCart();
-                this.reset();
-            } else {
-                showToast('Hi ha hagut un error en enviar la comanda', false);
-            }
-        })
-        .catch(error => {
-            showToast('Error de xarxa. Si us plau, comprova la teva connexió', false);
-        });
+    e.preventDefault();
+    
+    if (cart.length === 0) {
+        showToast('Si us plau, afegeix productes a la teva comanda', false);
+        return;
+    }
+    
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    
+    if (!name || !phone) {
+        showToast('Si us plau, omple el teu nom i telèfon', false);
+        return;
+    }
+    
+    // Preparar detalles del pedido en formato texto
+    let orderDetails = `Comanda de: ${name}\nTelèfon: ${phone}\n\nDetalls:\n`;
+    cart.forEach(item => {
+        orderDetails += `${item.quantity}x ${item.name} - ${(item.price * item.quantity).toFixed(2)}€\n`;
     });
+    orderDetails += `\nTOTAL: ${document.getElementById('totalPrice').textContent}`;
+
+    // Crear datos para Formspree
+    const formData = new URLSearchParams();
+    formData.append('name', name);
+    formData.append('phone', phone);
+    formData.append('notes', document.getElementById('notes').value);
+    formData.append('orderDetails', orderDetails);
+    formData.append('orderTotal', document.getElementById('totalPrice').textContent);
+    
+    // Enviar usando application/x-www-form-urlencoded
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            showToast('Comanda enviada amb èxit!');
+            cart = [];
+            updateCart();
+            this.reset();
+        } else {
+            throw new Error('Error en la respuesta del servidor');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast("Error d'enviament. Si us plau, prova més tard", false);
+    });
+});
     
     // Inicializar el carrito
     updateCart();
     </script>
-  </body>
-</html>
+      </body>
+    </html>
