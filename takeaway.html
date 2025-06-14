@@ -194,13 +194,15 @@
    ELEMENTOS DEL MENÚ - IMAGE STYLE
    ========================== */
 .menu-item {
-  display: flex;
+    display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 16px 18px;
   transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0; /* Línea separadora */
+  margin-bottom: 0; /* Asegura que no haya espacio extra */
 }
-bold
+
 .menu-item:hover {
   background: #f8f9fa;
 }
@@ -221,7 +223,7 @@ bold
   color: #000000;
   font-size: 0.9rem;
   line-height: 1.4;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .item-actions {
