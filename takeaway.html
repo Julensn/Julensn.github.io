@@ -483,6 +483,94 @@
   }
 }
 
+
+/* ======================= RESTRICCIONES DE HORARIO ========================== */
+        .closed-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        
+        .closed-overlay h2 {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .closed-overlay p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .closed-overlay .calendar {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .closed-overlay .day {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .closed-overlay .closed-day {
+            background-color: #e74c3c;
+        }
+        
+        .closed-overlay .open-hours {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+        
+        .closed-overlay .contact-info {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .closed-message {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 4px;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .closed-message h3 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        
+        .disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
     /* =======================
            FOOTER
         ========================== */
@@ -680,7 +768,11 @@
     <main>
       <section class="menu-section">
         <h1>Take Away</h1>
-
+        <div id="closedMessage" class="closed-message" style="display: none;">
+          <h3 id="closedMessageTitle">Avís: Servei no disponible</h3>
+          <p id="closedMessageText">El nostre servei de take away no està
+            disponible en aquest moment.</p>
+        </div>
       </section>
 
       <div class="container">
@@ -717,12 +809,12 @@
                     </div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">6,90 €</div>
-                  <button class="add-to-cart" data-name="Gyozes de pollastre"
-                    data-price="6.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">6,90 €</div>
+                    <button class="add-to-cart" data-name="Gyozes de pollastre"
+                      data-price="6.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -732,12 +824,12 @@
                       vapor amb salsa de porc.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">5,90 €</div>
-                  <button class="add-to-cart" data-name="Gyozes de verdures"
-                    data-price="5.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">5,90 €</div>
+                    <button class="add-to-cart" data-name="Gyozes de verdures"
+                      data-price="5.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -747,12 +839,12 @@
                       salsa picant</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">5,40 €</div>
-                  <button class="add-to-cart" data-name="Edamame picant"
-                    data-price="5.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">5,40 €</div>
+                    <button class="add-to-cart" data-name="Edamame picant"
+                      data-price="5.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -762,12 +854,12 @@
                       de tòfona</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">5,50 €</div>
-                  <button class="add-to-cart" data-name="Edamame trufat"
-                    data-price="5.50">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">5,50 €</div>
+                    <button class="add-to-cart" data-name="Edamame trufat"
+                      data-price="5.50">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -785,12 +877,12 @@
                       de vedella</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,90 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de vedella"
-                    data-price="11.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">11,90 €</div>
+                    <button class="add-to-cart" data-name="Yakisoba de vedella"
+                      data-price="11.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -800,12 +892,13 @@
                       barreja de verdures i bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">12,90 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de pollastre"
-                    data-price="12.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">12,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Yakisoba de pollastre"
+                      data-price="12.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -815,12 +908,12 @@
                       de verdures i bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">12,90 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de llagosta"
-                    data-price="12.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">12,90 €</div>
+                    <button class="add-to-cart" data-name="Yakisoba de llagosta"
+                      data-price="12.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -830,12 +923,12 @@
                       bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">10,10 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de verdures"
-                    data-price="10.10">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">10,10 €</div>
+                    <button class="add-to-cart" data-name="Yakisoba de verdures"
+                      data-price="10.10">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -855,13 +948,13 @@
                       verdures i bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Yakimeshi de pollastre cruixent"
-                    data-price="11.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">11,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Yakimeshi de pollastre cruixent"
+                      data-price="11.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -871,11 +964,12 @@
                       de verdures i bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,90 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de pollastre"
-                    data-price="11.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
+                    <div class="item-price">11,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Yakisoba de pollastre"
+                      data-price="11.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
                   </div>
                 </div>
 
@@ -886,11 +980,11 @@
                       de vedella.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,50 €</div>
-                  <button class="add-to-cart" data-name="Yakisoba de llagosta"
-                    data-price="12.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
+                    <div class="item-price">11,50 €</div>
+                    <button class="add-to-cart" data-name="Yakisoba de llagosta"
+                      data-price="12.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
                   </div>
                 </div>
 
@@ -901,12 +995,13 @@
                       bolets.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">10,10 €</div>
-                  <button class="add-to-cart" data-name="Yakimeshi de verdures"
-                    data-price="10.10">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">10,10 €</div>
+                    <button class="add-to-cart"
+                      data-name="Yakimeshi de verdures"
+                      data-price="10.10">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -922,12 +1017,13 @@
                     <div class="item-name">Peix blanc (6 peces)</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,20 €</div>
-                  <button class="add-to-cart" data-name="Sashimi de peix blanc"
-                    data-price="11.20">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">11,20 €</div>
+                    <button class="add-to-cart"
+                      data-name="Sashimi de peix blanc"
+                      data-price="11.20">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -935,12 +1031,12 @@
                     <div class="item-name">Tonyina (6 peces)</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">12,20 €</div>
-                  <button class="add-to-cart" data-name="Sashimi de tonyina"
-                    data-price="12.20">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">12,20 €</div>
+                    <button class="add-to-cart" data-name="Sashimi de tonyina"
+                      data-price="12.20">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -948,12 +1044,12 @@
                     <div class="item-name">Salmó (6 peces)</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,20 €</div>
-                  <button class="add-to-cart" data-name="Sashimi de salmó"
-                    data-price="11.20">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">11,20 €</div>
+                    <button class="add-to-cart" data-name="Sashimi de salmó"
+                      data-price="11.20">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -961,12 +1057,12 @@
                     <div class="item-name">Variat de sashimi (9 peces)</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">16,00 €</div>
-                  <button class="add-to-cart" data-name="Variat de sashimi "
-                    data-price="16.00">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">16,00 €</div>
+                    <button class="add-to-cart" data-name="Variat de sashimi "
+                      data-price="16.00">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="section">
@@ -982,12 +1078,12 @@
                           salsa cevichada.</div>
                       </div>
                       <div class="item-actions">
-                      <div class="item-price">11,50 €</div>
-                      <button class="add-to-cart" data-name="Bao de crancs"
-                        data-price="11.50">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
+                        <div class="item-price">11,50 €</div>
+                        <button class="add-to-cart" data-name="Bao de crancs"
+                          data-price="11.50">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
 
                     <div class="menu-item">
@@ -998,12 +1094,12 @@
                           ceba confitada i maionesa japonesa.</div>
                       </div>
                       <div class="item-actions">
-                      <div class="item-price">10,00 €</div>
-                      <button class="add-to-cart" data-name="Bao de pollastre"
-                        data-price="10.00">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
+                        <div class="item-price">10,00 €</div>
+                        <button class="add-to-cart" data-name="Bao de pollastre"
+                          data-price="10.00">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1025,13 +1121,13 @@
                       cevitxera i moniato fregit.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">6,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Nigiri de peix blanc acevichat"
-                    data-price="6.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">6,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Nigiri de peix blanc acevichat"
+                      data-price="6.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1041,12 +1137,12 @@
                       làmines de tòfona.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">7,40 €</div>
-                  <button class="add-to-cart" data-name="Nigiri de tòfona"
-                    data-price="7.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">7,40 €</div>
+                    <button class="add-to-cart" data-name="Nigiri de tòfona"
+                      data-price="7.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1056,12 +1152,12 @@
                       caramel·litzat i teriyaki de taronja.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">8,50 €</div>
-                  <button class="add-to-cart" data-name="Nigiri anguila fetge"
-                    data-price="8.50">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">8,50 €</div>
+                    <button class="add-to-cart" data-name="Nigiri anguila fetge"
+                      data-price="8.50">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1071,12 +1167,12 @@
                       taronja.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">6,40 €</div>
-                  <button class="add-to-cart"
-                    data-name="Nigiri de Salmó teriyaki" data-price="6.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">6,40 €</div>
+                    <button class="add-to-cart"
+                      data-name="Nigiri de Salmó teriyaki" data-price="6.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1086,12 +1182,12 @@
                       nigiris de la carta.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">15,90 €</div>
-                  <button class="add-to-cart" data-name="Variat nigiris"
-                    data-price="15.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">15,90 €</div>
+                    <button class="add-to-cart" data-name="Variat nigiris"
+                      data-price="15.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="section">
@@ -1109,12 +1205,12 @@
                           per a sushi</div>
                       </div>
                       <div class="item-actions">
-                      <div class="item-price">6,50 €</div>
-                      <button class="add-to-cart"
-                        data-name="Nigiri de peix blanc" data-price="6.50">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
+                        <div class="item-price">6,50 €</div>
+                        <button class="add-to-cart"
+                          data-name="Nigiri de peix blanc" data-price="6.50">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
 
                     <div class="menu-item">
@@ -1124,12 +1220,12 @@
                           per a sushi .</div>
                       </div>
                       <div class="item-actions">
-                      <div class="item-price">6,90 €</div>
-                      <button class="add-to-cart" data-name="Nigiri de tòfona"
-                        data-price="6.90">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
+                        <div class="item-price">6,90 €</div>
+                        <button class="add-to-cart" data-name="Nigiri de tòfona"
+                          data-price="6.90">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
 
                     <div class="menu-item">
@@ -1140,12 +1236,12 @@
 
                       </div>
                       <div class="item-actions">
-                      <div class="item-price">5,90 €</div>
-                      <button class="add-to-cart"
-                        data-name="Nigiri de anguila fetge" data-price="5.90">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
+                        <div class="item-price">5,90 €</div>
+                        <button class="add-to-cart"
+                          data-name="Nigiri de anguila fetge" data-price="5.90">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1167,12 +1263,13 @@
                       cobert amb làmines de peix blanc i salsa </div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">13,60 €</div>
-                  <button class="add-to-cart" data-name="Uramaki de anticuchero"
-                    data-price="13.60">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">13,60 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de anticuchero"
+                      data-price="13.60">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1183,12 +1280,12 @@
                       salsa cevitxera i moniato fregit.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">13,40 €</div>
-                  <button class="add-to-cart" data-name="Uramaki de acevichat"
-                    data-price="13.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">13,40 €</div>
+                    <button class="add-to-cart" data-name="Uramaki de acevichat"
+                      data-price="13.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1198,12 +1295,12 @@
                       amb tartar de tonyina en salsa de miso.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">14,40 €</div>
-                  <button class="add-to-cart" data-name="Uramaki de miso tuna"
-                    data-price="14.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">14,40 €</div>
+                    <button class="add-to-cart" data-name="Uramaki de miso tuna"
+                      data-price="14.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1213,12 +1310,12 @@
                       tartar de salmó en cítrics de kimchi.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">13,40 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="13.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">13,40 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="13.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1230,12 +1327,12 @@
                       teriyaki.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">14,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="14.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">14,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="14.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1245,12 +1342,12 @@
                       de maduixa i ceba caramel·litzada.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">13,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="13.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">13,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="13.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1260,12 +1357,12 @@
                       toc de tòfona.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">11,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="11.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">11,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="11.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1276,12 +1373,12 @@
                       emulsió trufada i salsa teriyaki.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">12,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="13.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">12,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="13.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1291,12 +1388,12 @@
                       maionesa trufada i llimona ratllada.</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">13,40 €</div>
-                  <button class="add-to-cart"
-                    data-name="Uramaki de salmó kimchi" data-price="13.40">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">13,40 €</div>
+                    <button class="add-to-cart"
+                      data-name="Uramaki de salmó kimchi" data-price="13.40">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1317,13 +1414,13 @@
                     </div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">10,90 €</div>
-                  <button class="add-to-cart"
-                    data-name="Hossomakis tempuritzat tanoshi"
-                    data-price="10.90">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">10,90 €</div>
+                    <button class="add-to-cart"
+                      data-name="Hossomakis tempuritzat tanoshi"
+                      data-price="10.90">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1333,12 +1430,12 @@
                       tonyina</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">8,50 €</div>
-                  <button class="add-to-cart" data-name="Maki de tonyina"
-                    data-price="8.50">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">8,50 €</div>
+                    <button class="add-to-cart" data-name="Maki de tonyina"
+                      data-price="8.50">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1348,12 +1445,12 @@
                       salmó</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">7,50 €</div>
-                  <button class="add-to-cart" data-name="Maki de salmó"
-                    data-price="7.50">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">7,50 €</div>
+                    <button class="add-to-cart" data-name="Maki de salmó"
+                      data-price="7.50">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1363,12 +1460,12 @@
                       alvocat</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">5,50 €</div>
-                  <button class="add-to-cart" data-name="Maki de salmó"
-                    data-price="5.50">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">5,50 €</div>
+                    <button class="add-to-cart" data-name="Maki de salmó"
+                      data-price="5.50">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1386,12 +1483,12 @@
                       mango i passiflora</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">4,00 €</div>
-                  <button class="add-to-cart"
-                    data-name="Mochi de mango i passiflora" data-price="4.00">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">4,00 €</div>
+                    <button class="add-to-cart"
+                      data-name="Mochi de mango i passiflora" data-price="4.00">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1401,12 +1498,12 @@
                       de te verd</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">4,00 €</div>
-                  <button class="add-to-cart" data-name="Mochi de matcha"
-                    data-price="4.00">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">4,00 €</div>
+                    <button class="add-to-cart" data-name="Mochi de matcha"
+                      data-price="4.00">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1416,12 +1513,12 @@
                       de formatge</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">4,00 €</div>
-                  <button class="add-to-cart" data-name="Mochi de cheesecake"
-                    data-price="4.00">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">4,00 €</div>
+                    <button class="add-to-cart" data-name="Mochi de cheesecake"
+                      data-price="4.00">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1431,12 +1528,12 @@
                       de sakura</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">4,00 €</div>
-                  <button class="add-to-cart" data-name="Mochi de cheesecake"
-                    data-price="4.00">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">4,00 €</div>
+                    <button class="add-to-cart" data-name="Mochi de cheesecake"
+                      data-price="4.00">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="menu-item">
@@ -1446,12 +1543,12 @@
                       de oreo</div>
                   </div>
                   <div class="item-actions">
-                  <div class="item-price">4,20 €</div>
-                  <button class="add-to-cart" data-name="Mochi de cheesecake"
-                    data-price="4.20">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
+                    <div class="item-price">4,20 €</div>
+                    <button class="add-to-cart" data-name="Mochi de cheesecake"
+                      data-price="4.20">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1525,263 +1622,393 @@
               </form>
             </div>
           </div>
-          <!-- TOAST DE CONFIRMACIÓN -->
-          <div class="toast" id="confirmationToast">
-            <i class="fas fa-check-circle"></i>
-            <div>Comanda enviada amb èxit!</div>
-          </div>
 
         </main>
-        <footer>
-          <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
-        </footer>
-        <script>
-    // Toggle del menú móvil
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+        <!-- Overlay para días cerrados -->
+        <div id="closedOverlay" class="closed-overlay" style="display: none;">
+          <h2 id="overlayTitle">Avui estem tancats</h2>
+          <p id="overlayText">El nostre servei de take away no està disponible
+            en aquest moment.</p>
 
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-    }
+          <div class="calendar">
+            <div class="day">Dg</div>
+            <div class="day closed-day">Dl</div>
+            <div class="day closed-day">Dt</div>
+            <div class="day">Dc</div>
+            <div class="day">Dj</div>
+            <div class="day">Dv</div>
+            <div class="day">Ds</div>
+          </div>
 
-    // Acordeones para las secciones del menú
-    document.querySelectorAll('.section-title').forEach(title => {
-      title.addEventListener('click', () => {
-        const section = title.parentElement;
-        section.classList.toggle('active');
-      });
-    });
+          <div class="open-hours">
+            <p><strong>Horari de servei:</strong></p>
+            <p>Dimecres a Diumenge</p>
+            <p>13:30 - 15:00 &nbsp;&nbsp;|&nbsp;&nbsp; 20:30 - 23:00</p>
+          </div>
 
-    // Carrito de compras
-    let cart = [];
-    const orderItemsEl = document.getElementById('orderItems');
-    const totalPriceEl = document.getElementById('totalPrice');
-    const submitBtn = document.getElementById('submitOrder');
+          <div class="contact-info">
+            <p>Telèfon: 623 70 32 82</p>
 
-    // Función para añadir productos al carrito
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', () => {
-        const name = button.getAttribute('data-name');
-        const price = parseFloat(button.getAttribute('data-price'));
+          <p>Adreça: Passeig del Compositor Beethoven, 3, 25230
+            Mollerussa, Lleida</p>
 
-        // Verificar si el producto ya está en el carrito
-        const existingItem = cart.find(item => item.name === name);
+      </div>
+    </div>
 
-        if (existingItem) {
-          existingItem.quantity++;
-        } else {
-          cart.push({
-            name: name,
-            price: price,
-            quantity: 1
-          });
+    <!-- TOAST DE CONFIRMACIÓN -->
+    <div class="toast" id="confirmationToast">
+      <i class="fas fa-check-circle"></i>
+      <div>Comanda enviada amb èxit!</div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Restaurante Mitori. Todos los derechos reservados.</p>
+    </footer>
+     <script>
+        // Toggle del menú móvil
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
         }
 
-        updateCart();
+        // Acordeones para las secciones del menú
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const section = title.parentElement;
+                section.classList.toggle('active');
+            });
+        });
 
-        // Animación de confirmación
-        button.innerHTML = '<i class="fas fa-check"></i>';
-        setTimeout(() => {
-          button.innerHTML = '<i class="fas fa-plus"></i>';
-        }, 1000);
-      });
-    });
+        // Carrito de compras
+        let cart = [];
+        const orderItemsEl = document.getElementById('orderItems');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const submitBtn = document.getElementById('submitOrder');
 
-    // Actualizar el carrito
-    function updateCart() {
-      // Limpiar el carrito
-      orderItemsEl.innerHTML = '';
+        // Función para añadir productos al carrito
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
 
-      if (cart.length === 0) {
-        orderItemsEl.innerHTML = `
-                <div class="empty-cart">
-                    <i class="fas fa-shopping-cart" style="font-size: 3rem; opacity: 0.3; margin-bottom: 15px;"></i>
-                    <p>La teva comanda està buida</p>
-                    <p class="green-text">Afegeix productes per començar</p>
-                </div>
-            `;
-        totalPriceEl.textContent = '0,00 €';
-        return;
-      }
+                // Verificar si el producto ya está en el carrito
+                const existingItem = cart.find(item => item.name === name);
 
-      // Calcular el total
-      let total = 0;
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({
+                        name: name,
+                        price: price,
+                        quantity: 1
+                    });
+                }
 
-      // Añadir cada elemento al carrito
-      cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
+                updateCart();
 
-        const itemEl = document.createElement('div');
-        itemEl.className = 'cart-item';
-        itemEl.innerHTML = `
-                <div class="item-details">
-                    <div class="item-name">${item.name}</div>
-                    <div class="item-quantity">
-                        <button class="quantity-btn decrease" data-name="${item.name}">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="quantity-btn increase" data-name="${item.name}">+</button>
-                        <button class="remove-btn" data-name="${item.name}">Eliminar</button>
+                // Animación de confirmación
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-plus"></i>';
+                }, 1000);
+            });
+        });
+
+        // Actualizar el carrito
+        function updateCart() {
+            // Limpiar el carrito
+            orderItemsEl.innerHTML = '';
+
+            if (cart.length === 0) {
+                orderItemsEl.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; opacity: 0.3; margin-bottom: 15px;"></i>
+                        <p>La teva comanda està buida</p>
+                        <p class="green-text">Afegeix productes per començar</p>
                     </div>
-                </div>
-                <div class="item-price">${itemTotal.toFixed(2)} €</div>
-            `;
+                `;
+                totalPriceEl.textContent = '0,00 €';
+                return;
+            }
 
-        orderItemsEl.appendChild(itemEl);
-      });
+            // Calcular el total
+            let total = 0;
 
-      // Actualizar el total
-      totalPriceEl.textContent = total.toFixed(2) + ' €';
+            // Añadir cada elemento al carrito
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
 
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrease" data-name="${item.name}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn increase" data-name="${item.name}">+</button>
+                            <button class="remove-btn" data-name="${item.name}">Eliminar</button>
+                        </div>
+                    </div>
+                    <div class="item-price">${itemTotal.toFixed(2)} €</div>
+                `;
 
-      // Sincronizar controles móviles (si existen)
-      document.querySelectorAll('.item-mobile-controls').forEach(control => {
-        const name = control.querySelector('.decrease').getAttribute('data-name');
+                orderItemsEl.appendChild(itemEl);
+            });
 
-        control.querySelector('.decrease').onclick = () => {
-          const item = cart.find(item => item.name === name);
-          if (item && item.quantity > 1) {
-            item.quantity--;
-          } else {
-            cart = cart.filter(item => item.name !== name);
-          }
-          updateCart();
-        };
+            // Actualizar el total
+            totalPriceEl.textContent = total.toFixed(2) + ' €';
 
-        control.querySelector('.increase').onclick = () => {
-          const item = cart.find(item => item.name === name);
-          if (item) item.quantity++;
-          else cart.push({ name, price: parseFloat(control.getAttribute('data-price')), quantity: 1 });
-          updateCart();
-        };
+            // Añadir eventos para los botones de cantidad y eliminar
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    const item = cart.find(item => item.name === name);
 
-        control.querySelector('.remove-btn').onclick = () => {
-          cart = cart.filter(item => item.name !== name);
-          updateCart();
-        };
-      });
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        cart = cart.filter(item => item.name !== name);
+                    }
 
+                    updateCart();
+                });
+            });
 
-      // Añadir eventos para los botones de cantidad y eliminar
-      document.querySelectorAll('.decrease').forEach(button => {
-        button.addEventListener('click', () => {
-          const name = button.getAttribute('data-name');
-          const item = cart.find(item => item.name === name);
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    const item = cart.find(item => item.name === name);
+                    item.quantity++;
+                    updateCart();
+                });
+            });
 
-          if (item.quantity > 1) {
-            item.quantity--;
-          } else {
-            cart = cart.filter(item => item.name !== name);
-          }
-
-          updateCart();
-        });
-      });
-
-      document.querySelectorAll('.increase').forEach(button => {
-        button.addEventListener('click', () => {
-          const name = button.getAttribute('data-name');
-          const item = cart.find(item => item.name === name);
-          item.quantity++;
-          updateCart();
-        });
-      });
-
-      document.querySelectorAll('.remove-btn').forEach(button => {
-        button.addEventListener('click', () => {
-          const name = button.getAttribute('data-name');
-          cart = cart.filter(item => item.name !== name);
-          updateCart();
-        });
-      });
-    }
-
-    // Función para mostrar el toast de confirmación
-    function showToast(message, isSuccess = true) {
-      const toast = document.getElementById('confirmationToast');
-      const toastIcon = toast.querySelector('i');
-      const toastMessage = toast.querySelector('div:nth-child(2)'); // Corregido aquí
-
-      // Configurar según el tipo de mensaje
-      if (isSuccess) {
-        toast.style.backgroundColor = '#27ae60';
-        toastIcon.className = 'fas fa-check-circle';
-      } else {
-        toast.style.backgroundColor = '#e74c3c';
-        toastIcon.className = 'fas fa-exclamation-circle';
-      }
-
-      toastMessage.textContent = message;
-      toast.classList.add('active');
-
-      // Ocultar después de 3 segundos
-      setTimeout(() => {
-        toast.classList.remove('active');
-      }, 3000);
-    }
-
-    // Manejar el envío del formulario a Formspree
-    document.getElementById('orderForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      if (cart.length === 0) {
-        showToast('Si us plau, afegeix productes a la teva comanda', false);
-        return;
-      }
-
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-
-      if (!name || !phone) {
-        showToast('Si us plau, omple el teu nom i telèfon', false);
-        return;
-      }
-
-      // Preparar detalles del pedido en formato texto
-      let orderDetails = `Comanda de: ${name}\nTelèfon: ${phone}\n\nDetalls:\n`;
-      cart.forEach(item => {
-        orderDetails += `${item.quantity}x ${item.name} - ${(item.price * item.quantity).toFixed(2)}€\n`;
-      });
-      orderDetails += `\nTOTAL: ${document.getElementById('totalPrice').textContent}`;
-
-      // Crear datos para Formspree
-      const formData = new URLSearchParams();
-      formData.append('name', name);
-      formData.append('phone', phone);
-      formData.append('notes', document.getElementById('notes').value);
-      formData.append('orderDetails', orderDetails);
-      formData.append('orderTotal', document.getElementById('totalPrice').textContent);
-
-      // Enviar usando application/x-www-form-urlencoded
-      fetch(this.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const name = button.getAttribute('data-name');
+                    cart = cart.filter(item => item.name !== name);
+                    updateCart();
+                });
+            });
         }
-      })
-        .then(response => {
-          if (response.ok) {
-            showToast('Comanda enviada amb èxit!');
-            cart = [];
-            updateCart();
-            this.reset();
-          } else {
-            throw new Error('Error en la respuesta del servidor');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          showToast("Error d'enviament. Si us plau, prova més tard", false);
+
+        // Función para mostrar el toast de confirmación
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('confirmationToast');
+            const toastIcon = toast.querySelector('i');
+            const toastMessage = toast.querySelector('div:nth-child(2)');
+
+            // Configurar según el tipo de mensaje
+            if (isSuccess) {
+                toast.style.backgroundColor = '#27ae60';
+                toastIcon.className = 'fas fa-check-circle';
+            } else {
+                toast.style.backgroundColor = '#e74c3c';
+                toastIcon.className = 'fas fa-exclamation-circle';
+            }
+
+            toastMessage.textContent = message;
+            toast.classList.add('active');
+
+            // Ocultar después de 3 segundos
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+          // Función para verificar horario de servicio - COMPLETAMENTE REVISADA
+    function checkServiceHours() {
+        const now = new Date();
+        const day = now.getDay(); // 0 = Domingo, 1 = Lunes, 2 = Martes...
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const currentTime = hours * 60 + minutes;
+        
+        // Horarios en minutos desde medianoche
+        const lunchStart = 13 * 60 + 30;  // 13:30
+        const lunchEnd = 15 * 60;         // 15:00
+        const dinnerStart = 20 * 60 + 30; // 20:30
+        const dinnerEnd = 23 * 60;        // 23:00
+        
+        // 1. Comprobar si es lunes o martes (cerrado todo el día)
+        if (day === 1 || day === 2) {
+            return {
+                open: false,
+                message: "Avui estem tancats. Tornem a obrir dimecres a les 13:30.",
+                title: "Tancat els dilluns i dimarts"
+            };
+        }
+        
+        // 2. Comprobar horario de comida (13:30-15:00)
+        if (currentTime >= lunchStart && currentTime <= lunchEnd) {
+            return { open: true };
+        }
+        
+        // 3. Comprobar horario de cena (20:30-23:00)
+        if (currentTime >= dinnerStart && currentTime <= dinnerEnd) {
+            return { open: true };
+        }
+        
+        // 4. Fuera de horario - determinar próximo servicio
+        let nextServiceTime = "";
+        let nextServiceDay = "";
+        
+        // Si es domingo por la noche
+        if (day === 0 && currentTime > dinnerEnd) {
+            return {
+                open: false,
+                message: "Tornem a obrir dimecres a les 13:30.",
+                title: "Fora d'horari"
+            };
+        }
+        
+        // Si es antes del almuerzo
+        if (currentTime < lunchStart) {
+            nextServiceTime = "13:30";
+            nextServiceDay = "avui";
+        } 
+        // Si es después del almuerzo y antes de la cena
+        else if (currentTime < dinnerStart) {
+            nextServiceTime = "20:30";
+            nextServiceDay = "avui";
+        }
+        // Si es después de la cena (y no es domingo)
+        else {
+            nextServiceTime = "13:30";
+            nextServiceDay = "demà";
+            
+            // Si es sábado por la noche, el próximo es miércoles
+            if (day === 6) {
+                nextServiceDay = "dimecres";
+            }
+        }
+        
+        return {
+            open: false,
+            message: `El nostre servei de take away està tancat. Tornem a obrir ${nextServiceDay} a les ${nextServiceTime}.`,
+            title: "Fora d'horari"
+        };
+    }
+
+    // Función para deshabilitar el sistema de pedidos - MEJORADA
+    function disableOrderSystem(reason) {
+        // 1. Mostrar mensaje de cerrado
+        const closedMessage = document.getElementById('closedMessage');
+        if (closedMessage) {
+            closedMessage.style.display = 'block';
+            document.getElementById('closedMessageTitle').textContent = reason.title;
+            document.getElementById('closedMessageText').textContent = reason.message;
+        }
+        
+        // 2. Mostrar overlay de cerrado
+        const overlay = document.getElementById('closedOverlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
+            document.getElementById('overlayTitle').textContent = reason.title;
+            document.getElementById('overlayText').textContent = reason.message;
+        }
+        
+        // 3. Deshabilitar todos los botones de añadir al carrito
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.disabled = true;
+            button.classList.add('disabled');
         });
-    });
+        
+        // 4. Deshabilitar botón de enviar pedido
+        const submitBtn = document.getElementById('submitOrder');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('disabled');
+        }
+        
+        // 5. Deshabilitar secciones del menú
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.style.pointerEvents = 'none';
+            title.style.cursor = 'default';
+            title.classList.add('disabled');
+        });
+    }
 
-    // Inicializar el carrito
-    updateCart();
-  </script>
-      </body>
+        // Manejar el envío del formulario a Formspree
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-    </html>
+            if (cart.length === 0) {
+                showToast('Si us plau, afegeix productes a la teva comanda', false);
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || !phone) {
+                showToast('Si us plau, omple el teu nom i telèfon', false);
+                return;
+            }
+
+            // Preparar detalles del pedido en formato texto
+            let orderDetails = `Comanda de: ${name}\nTelèfon: ${phone}\n\nDetalls:\n`;
+            cart.forEach(item => {
+                orderDetails += `${item.quantity}x ${item.name} - ${(item.price * item.quantity).toFixed(2)}€\n`;
+            });
+            orderDetails += `\nTOTAL: ${document.getElementById('totalPrice').textContent}`;
+
+            // Crear datos para Formspree
+            const formData = new URLSearchParams();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('notes', document.getElementById('notes').value);
+            formData.append('orderDetails', orderDetails);
+            formData.append('orderTotal', document.getElementById('totalPrice').textContent);
+
+            // Enviar usando application/x-www-form-urlencoded
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showToast('Comanda enviada amb èxit!');
+                        cart = [];
+                        updateCart();
+                        this.reset();
+                    } else {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast("Error d'enviament. Si us plau, prova més tard", false);
+                });
+        });
+
+        // Al cargar la página, verificar horario de servicio
+    document.addEventListener('DOMContentLoaded', function() {
+        // Comprobar horario de servicio
+        const serviceStatus = checkServiceHours();
+        
+        console.log("Estado del servicio:", serviceStatus);
+        
+        if (!serviceStatus.open) {
+            disableOrderSystem({
+                title: serviceStatus.title,
+                message: serviceStatus.message
+            });
+        }
+            
+            // Inicializar el carrito
+            updateCart();
+        });
+    </script>
+</body>
+</html>
